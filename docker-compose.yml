@@ -1,0 +1,21 @@
+version: '3.1'
+
+services:
+  game_db_test:
+    image: postgres
+    environment:
+      POSTGRES_DB: game_db_test
+      POSTGRES_USER: test_user
+      POSTGRES_PASSWORD: test_password
+    ports:
+      - "5481:5432"
+
+  game_db_dev:
+      image: postgres
+      environment:
+        POSTGRES_DB: game_db_dev
+        POSTGRES_USER: dev_user
+        POSTGRES_PASSWORD: dev_password
+      ports:
+        - "5482:5432" 
+
