@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="ExDoc v0.34.0">
+    <meta name="project" content="game_app v0.1.0">
+
+
+    <title>GameApp.Accounts — game_app v0.1.0</title>
+    <link rel="stylesheet" href="dist/html-elixir-K5ICTFVY.css" />
+
+
+    <script src="dist/handlebars.runtime-NWIB6V2M.js"></script>
+    <script src="dist/handlebars.templates-K7URE6B4.js"></script>
+    <script src="dist/sidebar_items-244F1D7A.js"></script>
+    <script src="docs_config.js"></script>
+    <script async src="dist/html-Q4PYR6ZR.js"></script>
+
+  </head>
+  <body data-type="modules" class="page-module">
+    <script>
+
+      try {
+        var settings = JSON.parse(localStorage.getItem('ex_doc:settings') || '{}');
+
+        if (settings.theme === 'dark' ||
+           ((settings.theme === 'system' || settings.theme == null) &&
+             window.matchMedia('(prefers-color-scheme: dark)').matches)
+           ) {
+          document.body.classList.add('dark')
+        }
+      } catch (error) { }
+    </script>
+
+<div class="body-wrapper">
+
+<button id="sidebar-menu" class="sidebar-button sidebar-toggle" aria-label="toggle sidebar" aria-controls="sidebar">
+  <i class="ri-menu-line ri-lg" title="Collapse/expand sidebar"></i>
+</button>
+
+<nav id="sidebar" class="sidebar">
+
+  <div class="sidebar-header">
+    <div class="sidebar-projectInfo">
+
+      <div>
+        <a href="api-reference.html" class="sidebar-projectName" translate="no">
+game_app
+        </a>
+        <div class="sidebar-projectVersion" translate="no">
+          v0.1.0
+        </div>
+      </div>
+    </div>
+    <ul id="sidebar-listNav" class="sidebar-listNav" role="tablist">
+      <li>
+        <button id="extras-list-tab-button" role="tab" data-type="extras" aria-controls="extras-tab-panel" aria-selected="true" tabindex="0">
+Pages
+        </button>
+      </li>
+
+        <li>
+          <button id="modules-list-tab-button" role="tab" data-type="modules" aria-controls="modules-tab-panel" aria-selected="false" tabindex="-1">
+            Modules
+          </button>
+        </li>
+
+
+    </ul>
+  </div>
+
+  <div id="extras-tab-panel" class="sidebar-tabpanel" role="tabpanel" aria-labelledby="extras-list-tab-button">
+    <ul id="extras-full-list" class="full-list"></ul>
+  </div>
+
+    <div id="modules-tab-panel" class="sidebar-tabpanel" role="tabpanel" aria-labelledby="modules-list-tab-button" hidden>
+      <ul id="modules-full-list" class="full-list"></ul>
+    </div>
+
+
+</nav>
+
+<main class="content">
+  <output role="status" id="toast"></output>
+
+  <div id="content" class="content-inner">
+    <div class="top-search">
+      <div class="search-settings">
+        <form class="search-bar" action="search.html">
+          <label class="search-label">
+            <span class="sr-only">Search documentation of game_app</span>
+            <input name="q" type="text" class="search-input" placeholder="Press / to search" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" />
+          </label>
+          <button type="submit" class="search-button" aria-label="Submit Search">
+            <i class="ri-search-2-line ri-lg" aria-hidden="true" title="Submit search"></i>
+          </button>
+          <button type="button" tabindex="-1" class="search-close-button" aria-hidden="true">
+            <i class="ri-close-line ri-lg" title="Cancel search"></i>
+          </button>
+        </form>
+        <div class="autocomplete">
+        </div>
+        <button class="icon-settings display-settings">
+          <i class="ri-settings-3-line"></i>
+          <span class="sr-only">Settings</span>
+        </button>
+      </div>
+    </div>
+
+<div id="top-content">
+  <h1>
+
+    <span translate="no">GameApp.Accounts</span> 
+    <small class="app-vsn" translate="no">(game_app v0.1.0)</small>
+
+  </h1>
+
+
+    <section id="moduledoc">
+<p>The Accounts context.</p>
+    </section>
+
+</div>
+
+  <section id="summary" class="details-list">
+    <h1 class="section-heading">
+      <a class="hover-link" href="#summary">
+        <i class="ri-link-m" aria-hidden="true"></i>
+      </a>
+      <span class="text">Summary</span>
+    </h1>
+<div class="summary-functions summary">
+  <h2>
+    <a href="#functions">Functions</a>
+  </h2>
+
+    <div class="summary-row">
+      <div class="summary-signature">
+        <a href="#create_player/1" data-no-tooltip translate="no">create_player(attrs \\ %{})</a>
+
+      </div>
+
+        <div class="summary-synopsis"><p>Creates a new player in the database.</p></div>
+
+    </div>
+
+    <div class="summary-row">
+      <div class="summary-signature">
+        <a href="#delete_player/1" data-no-tooltip translate="no">delete_player(player)</a>
+
+      </div>
+
+        <div class="summary-synopsis"><p>Deletes a specific player from the database.</p></div>
+
+    </div>
+
+    <div class="summary-row">
+      <div class="summary-signature">
+        <a href="#get_player!/1" data-no-tooltip translate="no">get_player!(id)</a>
+
+      </div>
+
+        <div class="summary-synopsis"><p>Fetches a player by ID from the database.</p></div>
+
+    </div>
+
+    <div class="summary-row">
+      <div class="summary-signature">
+        <a href="#list_players/0" data-no-tooltip translate="no">list_players()</a>
+
+      </div>
+
+        <div class="summary-synopsis"><p>Retrieves all players from the database.</p></div>
+
+    </div>
+
+    <div class="summary-row">
+      <div class="summary-signature">
+        <a href="#update_player/2" data-no-tooltip translate="no">update_player(player, attrs)</a>
+
+      </div>
+
+        <div class="summary-synopsis"><p>Updates a player, ensuring that the score only increases.</p></div>
+
+    </div>
+
+</div>
+
+  </section>
+
+
+  <section id="functions" class="details-list">
+    <h1 class="section-heading">
+      <a class="hover-link" href="#functions">
+        <i class="ri-link-m" aria-hidden="true"></i>
+      </a>
+      <span class="text">Functions</span>
+    </h1>
+    <div class="functions-list">
+<section class="detail" id="create_player/1">
+
+    <span id="create_player/0"></span>
+
+  <div class="detail-header">
+    <a href="#create_player/1" class="detail-link" data-no-tooltip title="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature" translate="no">create_player(attrs \\ %{})</h1>
+
+
+  </div>
+
+  <section class="docstring">
+
+<p>Creates a new player in the database.</p><p>This function creates a new player using the provided attributes. It uses a changeset to validate the attributes against the Player schema before attempting to insert them into the database. If the attributes are valid, the new player is saved, and the function returns the newly created player struct. If there are validation errors or any other insertion issues, it returns an error changeset.</p><h2 id="create_player/1-parameters" class="section-heading">
+  <a href="#create_player/1-parameters" class="hover-link">
+    <i class="ri-link-m" aria-hidden="true"></i>
+  </a>
+  <span class="text">Parameters</span>
+</h2>
+<ul><li><code class="inline">attrs</code>: A map containing the attributes for the new player. Expected keys correspond to the fields defined in the Player schema, such as <code class="inline">name</code>, <code class="inline">email</code>, and <code class="inline">score</code>.</li></ul><h2 id="create_player/1-examples" class="section-heading">
+  <a href="#create_player/1-examples" class="hover-link">
+    <i class="ri-link-m" aria-hidden="true"></i>
+  </a>
+  <span class="text">Examples</span>
+</h2>
+<pre><code class="makeup elixir" translate="no"><span class="c1"># Creating a player with valid attributes</span><span class="w">
+</span><span class="gp unselectable">iex&gt; </span><span class="n">create_player</span><span class="p" data-group-id="3957444662-1">(</span><span class="p" data-group-id="3957444662-2">%{</span><span class="s">&quot;name&quot;</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="s">&quot;John Doe&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;email&quot;</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="s">&quot;john@example.com&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;score&quot;</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="s">&quot;20&quot;</span><span class="p" data-group-id="3957444662-2">}</span><span class="p" data-group-id="3957444662-1">)</span><span class="w">
+</span><span class="p" data-group-id="3957444662-3">{</span><span class="ss">:ok</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="3957444662-4">%</span><span class="nc" data-group-id="3957444662-4">Player</span><span class="p" data-group-id="3957444662-4">{</span><span class="ss">name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;John Doe&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">email</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;john@example.com&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">score</span><span class="p">:</span><span class="w"> </span><span class="mi">20</span><span class="p" data-group-id="3957444662-4">}</span><span class="p" data-group-id="3957444662-3">}</span><span class="w">
+
+</span><span class="c1"># Attempting to create a player with invalid attributes</span><span class="w">
+</span><span class="gp unselectable">iex&gt; </span><span class="n">create_player</span><span class="p" data-group-id="3957444662-5">(</span><span class="p" data-group-id="3957444662-6">%{</span><span class="s">&quot;name&quot;</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="no">nil</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;email&quot;</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="s">&quot;john@example.com&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;score&quot;</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="s">&quot;20&quot;</span><span class="p" data-group-id="3957444662-6">}</span><span class="p" data-group-id="3957444662-5">)</span><span class="w">
+</span><span class="p" data-group-id="3957444662-7">{</span><span class="ss">:error</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="3957444662-8">%</span><span class="nc" data-group-id="3957444662-8">Ecto.Changeset</span><span class="p" data-group-id="3957444662-8">{</span><span class="ss">errors</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="3957444662-9">[</span><span class="ss">name</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="3957444662-10">{</span><span class="s">&quot;can&#39;t be blank&quot;</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="3957444662-11">[</span><span class="ss">validation</span><span class="p">:</span><span class="w"> </span><span class="ss">:required</span><span class="p" data-group-id="3957444662-11">]</span><span class="p" data-group-id="3957444662-10">}</span><span class="p" data-group-id="3957444662-9">]</span><span class="p" data-group-id="3957444662-8">}</span><span class="p" data-group-id="3957444662-7">}</span></code></pre><h2 id="create_player/1-returns" class="section-heading">
+  <a href="#create_player/1-returns" class="hover-link">
+    <i class="ri-link-m" aria-hidden="true"></i>
+  </a>
+  <span class="text">Returns</span>
+</h2>
+<ul><li><code class="inline">{:ok, %Player{}}</code>: Successfully created player.</li><li><code class="inline">{:error, %Ecto.Changeset{}}</code>: The changeset did not validate or could not be saved to the database.</li></ul>
+  </section>
+</section>
+<section class="detail" id="delete_player/1">
+
+  <div class="detail-header">
+    <a href="#delete_player/1" class="detail-link" data-no-tooltip title="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature" translate="no">delete_player(player)</h1>
+
+
+  </div>
+
+  <section class="docstring">
+
+<p>Deletes a specific player from the database.</p><p>This function takes a player struct and deletes it from the database. It is essential to provide an existing player struct as the argument. If the deletion is successful, it returns an <code class="inline">:ok</code> tuple with the deleted player data. If the deletion fails (e.g., due to foreign key constraints or if the player does not exist), it returns an <code class="inline">:error</code> tuple.</p><h2 id="delete_player/1-parameters" class="section-heading">
+  <a href="#delete_player/1-parameters" class="hover-link">
+    <i class="ri-link-m" aria-hidden="true"></i>
+  </a>
+  <span class="text">Parameters</span>
+</h2>
+<ul><li><code class="inline">player</code>: A <code class="inline">%Player{}</code> struct representing the player to be deleted. The struct must already exist and be loaded from the database.</li></ul><h2 id="delete_player/1-examples" class="section-heading">
+  <a href="#delete_player/1-examples" class="hover-link">
+    <i class="ri-link-m" aria-hidden="true"></i>
+  </a>
+  <span class="text">Examples</span>
+</h2>
+<pre><code class="makeup elixir" translate="no"><span class="c1"># Deleting a player with a valid struct</span><span class="w">
+</span><span class="gp unselectable">iex&gt; </span><span class="n">delete_player</span><span class="p" data-group-id="8918354741-1">(</span><span class="n">player</span><span class="p" data-group-id="8918354741-1">)</span><span class="w">
+</span><span class="p" data-group-id="8918354741-2">{</span><span class="ss">:ok</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="8918354741-3">%</span><span class="nc" data-group-id="8918354741-3">Player</span><span class="p" data-group-id="8918354741-3">{</span><span class="ss">id</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="ss">name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Charlie&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">email</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;charlie@example.com&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">score</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="p" data-group-id="8918354741-3">}</span><span class="p" data-group-id="8918354741-2">}</span><span class="w">
+
+</span><span class="c1"># Attempting to delete a player that does not exist or has constraints preventing deletion</span><span class="w">
+</span><span class="gp unselectable">iex&gt; </span><span class="n">delete_player</span><span class="p" data-group-id="8918354741-4">(</span><span class="n">non_existent_player</span><span class="p" data-group-id="8918354741-4">)</span><span class="w">
+</span><span class="p" data-group-id="8918354741-5">{</span><span class="ss">:error</span><span class="p">,</span><span class="w"> </span><span class="n">changeset</span><span class="p" data-group-id="8918354741-5">}</span></code></pre><h2 id="delete_player/1-returns" class="section-heading">
+  <a href="#delete_player/1-returns" class="hover-link">
+    <i class="ri-link-m" aria-hidden="true"></i>
+  </a>
+  <span class="text">Returns</span>
+</h2>
+<ul><li><code class="inline">{:ok, %Player{}}</code>: Successfully deleted player.</li><li><code class="inline">{:error, changeset}</code>: The deletion failed due to a constraint or the player does not exist.</li></ul>
+  </section>
+</section>
+<section class="detail" id="get_player!/1">
+
+  <div class="detail-header">
+    <a href="#get_player!/1" class="detail-link" data-no-tooltip title="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature" translate="no">get_player!(id)</h1>
+
+
+  </div>
+
+  <section class="docstring">
+
+<p>Fetches a player by ID from the database.</p><p>This function retrieves a player based on the provided ID. It directly queries the Player table in the database. If a player with the specified ID exists, it returns the player struct. If no player with such ID exists, it raises an <a href="https://hexdocs.pm/ecto/3.11.2/Ecto.NoResultsError.html"><code class="inline">Ecto.NoResultsError</code></a>.</p><h2 id="get_player!/1-parameters" class="section-heading">
+  <a href="#get_player!/1-parameters" class="hover-link">
+    <i class="ri-link-m" aria-hidden="true"></i>
+  </a>
+  <span class="text">Parameters</span>
+</h2>
+<ul><li><code class="inline">id</code>: The ID of the player to retrieve. Typically, this is an integer value.</li></ul><h2 id="get_player!/1-examples" class="section-heading">
+  <a href="#get_player!/1-examples" class="hover-link">
+    <i class="ri-link-m" aria-hidden="true"></i>
+  </a>
+  <span class="text">Examples</span>
+</h2>
+<pre><code class="makeup elixir" translate="no"><span class="c1"># Fetching a player with a valid ID</span><span class="w">
+</span><span class="gp unselectable">iex&gt; </span><span class="n">get_player!</span><span class="p" data-group-id="0083706587-1">(</span><span class="mi">5</span><span class="p" data-group-id="0083706587-1">)</span><span class="w">
+</span><span class="p" data-group-id="0083706587-2">%</span><span class="nc" data-group-id="0083706587-2">Player</span><span class="p" data-group-id="0083706587-2">{</span><span class="ss">id</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="ss">name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Alice&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">email</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;alice@example.com&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">score</span><span class="p">:</span><span class="w"> </span><span class="mi">15</span><span class="p" data-group-id="0083706587-2">}</span><span class="w">
+
+</span><span class="c1"># Attempting to fetch a player with a non-existing ID</span><span class="w">
+</span><span class="gp unselectable">iex&gt; </span><span class="n">get_player!</span><span class="p" data-group-id="0083706587-3">(</span><span class="mi">9999</span><span class="p" data-group-id="0083706587-3">)</span><span class="w">
+</span><span class="gt">** (Ecto.NoResultsError)</span></code></pre><h2 id="get_player!/1-returns" class="section-heading">
+  <a href="#get_player!/1-returns" class="hover-link">
+    <i class="ri-link-m" aria-hidden="true"></i>
+  </a>
+  <span class="text">Returns</span>
+</h2>
+<ul><li><code class="inline">%Player{}</code>: The player record if found.</li><li>Raises <a href="https://hexdocs.pm/ecto/3.11.2/Ecto.NoResultsError.html"><code class="inline">Ecto.NoResultsError</code></a> if no player with the given ID exists.</li></ul>
+  </section>
+</section>
+<section class="detail" id="list_players/0">
+
+  <div class="detail-header">
+    <a href="#list_players/0" class="detail-link" data-no-tooltip title="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature" translate="no">list_players()</h1>
+
+
+  </div>
+
+  <section class="docstring">
+
+<p>Retrieves all players from the database.</p><p>This function queries the Player table and returns a list of all player records. It's a straightforward retrieval that does not apply any filters or conditions, so it will return all players stored in the database.</p><h2 id="list_players/0-examples" class="section-heading">
+  <a href="#list_players/0-examples" class="hover-link">
+    <i class="ri-link-m" aria-hidden="true"></i>
+  </a>
+  <span class="text">Examples</span>
+</h2>
+<pre><code class="makeup elixir" translate="no"><span class="c1"># Getting a list of all players</span><span class="w">
+</span><span class="gp unselectable">iex&gt; </span><span class="n">list_players</span><span class="p" data-group-id="5783062508-1">(</span><span class="p" data-group-id="5783062508-1">)</span><span class="w">
+</span><span class="p" data-group-id="5783062508-2">[</span><span class="p" data-group-id="5783062508-3">%</span><span class="nc" data-group-id="5783062508-3">Player</span><span class="p" data-group-id="5783062508-3">{</span><span class="ss">id</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="ss">name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Alice&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">email</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;alice@example.com&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">score</span><span class="p">:</span><span class="w"> </span><span class="mi">15</span><span class="p" data-group-id="5783062508-3">}</span><span class="p">,</span><span class="w">
+ </span><span class="p" data-group-id="5783062508-4">%</span><span class="nc" data-group-id="5783062508-4">Player</span><span class="p" data-group-id="5783062508-4">{</span><span class="ss">id</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="ss">name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Bob&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">email</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;bob@example.com&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">score</span><span class="p">:</span><span class="w"> </span><span class="mi">12</span><span class="p" data-group-id="5783062508-4">}</span><span class="p" data-group-id="5783062508-2">]</span></code></pre><h2 id="list_players/0-returns" class="section-heading">
+  <a href="#list_players/0-returns" class="hover-link">
+    <i class="ri-link-m" aria-hidden="true"></i>
+  </a>
+  <span class="text">Returns</span>
+</h2>
+<ul><li>A list of <code class="inline">%Player{}</code> structs: This could be an empty list if no players are present in the database.</li></ul>
+  </section>
+</section>
+<section class="detail" id="update_player/2">
+
+  <div class="detail-header">
+    <a href="#update_player/2" class="detail-link" data-no-tooltip title="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature" translate="no">update_player(player, attrs)</h1>
+
+
+  </div>
+
+  <section class="docstring">
+
+<p>Updates a player, ensuring that the score only increases.</p><p>This function updates a player's attributes while specifically ensuring that the player's score is updated to the maximum value between the existing score and any new score provided. If no new score is provided or the provided score is less than the current score, the current score is maintained.</p><h2 id="update_player/2-parameters" class="section-heading">
+  <a href="#update_player/2-parameters" class="hover-link">
+    <i class="ri-link-m" aria-hidden="true"></i>
+  </a>
+  <span class="text">Parameters</span>
+</h2>
+<ul><li><code class="inline">player</code>: The <code class="inline">%Player{}</code> struct to be updated.</li><li><code class="inline">attrs</code>: A map of attributes to update. The <code class="inline">score</code> in <code class="inline">attrs</code> should be an integer or string that can be converted to an integer.</li></ul><h2 id="update_player/2-examples" class="section-heading">
+  <a href="#update_player/2-examples" class="hover-link">
+    <i class="ri-link-m" aria-hidden="true"></i>
+  </a>
+  <span class="text">Examples</span>
+</h2>
+<pre><code class="makeup elixir" translate="no"><span class="c1"># When a higher score is provided</span><span class="w">
+</span><span class="gp unselectable">iex&gt; </span><span class="n">update_player</span><span class="p" data-group-id="5515822648-1">(</span><span class="n">player</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="5515822648-2">%{</span><span class="s">&quot;score&quot;</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="s">&quot;30&quot;</span><span class="p" data-group-id="5515822648-2">}</span><span class="p" data-group-id="5515822648-1">)</span><span class="w">
+</span><span class="p" data-group-id="5515822648-3">{</span><span class="ss">:ok</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="5515822648-4">%</span><span class="nc" data-group-id="5515822648-4">Player</span><span class="p" data-group-id="5515822648-4">{</span><span class="ss">score</span><span class="p">:</span><span class="w"> </span><span class="mi">30</span><span class="p" data-group-id="5515822648-4">}</span><span class="p" data-group-id="5515822648-3">}</span><span class="w">
+
+</span><span class="c1"># When a lower or equal score is provided</span><span class="w">
+</span><span class="gp unselectable">iex&gt; </span><span class="n">update_player</span><span class="p" data-group-id="5515822648-5">(</span><span class="n">player</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="5515822648-6">%{</span><span class="s">&quot;score&quot;</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="s">&quot;15&quot;</span><span class="p" data-group-id="5515822648-6">}</span><span class="p" data-group-id="5515822648-5">)</span><span class="w">
+</span><span class="p" data-group-id="5515822648-7">{</span><span class="ss">:ok</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="5515822648-8">%</span><span class="nc" data-group-id="5515822648-8">Player</span><span class="p" data-group-id="5515822648-8">{</span><span class="ss">score</span><span class="p">:</span><span class="w"> </span><span class="mi">20</span><span class="p" data-group-id="5515822648-8">}</span><span class="p" data-group-id="5515822648-7">}</span><span class="w"> </span><span class="c1"># Assuming the current score was 20</span><span class="w">
+
+</span><span class="c1"># When a non-integer score is provided</span><span class="w">
+</span><span class="gp unselectable">iex&gt; </span><span class="n">update_player</span><span class="p" data-group-id="5515822648-9">(</span><span class="n">player</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="5515822648-10">%{</span><span class="s">&quot;score&quot;</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="s">&quot;bad_value&quot;</span><span class="p" data-group-id="5515822648-10">}</span><span class="p" data-group-id="5515822648-9">)</span><span class="w">
+</span><span class="p" data-group-id="5515822648-11">{</span><span class="ss">:error</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="5515822648-12">%</span><span class="nc" data-group-id="5515822648-12">Ecto.Changeset</span><span class="p" data-group-id="5515822648-12">{</span><span class="p" data-group-id="5515822648-12">}</span><span class="p" data-group-id="5515822648-11">}</span></code></pre><h2 id="update_player/2-returns" class="section-heading">
+  <a href="#update_player/2-returns" class="hover-link">
+    <i class="ri-link-m" aria-hidden="true"></i>
+  </a>
+  <span class="text">Returns</span>
+</h2>
+<ul><li><code class="inline">{:ok, %Player{}}</code>: Successfully updated player.</li><li><code class="inline">{:error, %Ecto.Changeset{}}</code>: The changeset did not validate or could not be saved to the database.</li></ul>
+  </section>
+</section>
+
+    </div>
+  </section>
+
+    <footer class="footer">
+      <p>
+
+        <span class="line">
+          <button class="a-main footer-button display-quick-switch" title="Search HexDocs packages">
+            Search HexDocs
+          </button>
+
+            <a href="game_app.epub" title="ePub version">
+              Download ePub version
+            </a>
+
+        </span>
+      </p>
+
+      <p class="built-using">
+        Built using
+        <a href="https://github.com/elixir-lang/ex_doc" title="ExDoc" target="_blank" rel="help noopener" translate="no">ExDoc</a> (v0.34.0) for the
+
+          <a href="https://elixir-lang.org" title="Elixir" target="_blank" translate="no">Elixir programming language</a>
+
+      </p>
+
+    </footer>
+  </div>
+</main>
+</div>
+
+  </body>
+</html>
