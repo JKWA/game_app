@@ -6,6 +6,10 @@ down:
 	@echo "Shutting down all containers..."
 	docker compose down
 
+docs:
+	@echo "Generating documentation..."
+	MIX_ENV=dev mix docs
+
 setup.dev:
 	@echo "Getting deps for development environment..."
 	MIX_ENV=dev mix deps.get

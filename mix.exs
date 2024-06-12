@@ -49,7 +49,10 @@ defmodule GameApp.MixProject do
       {:telemetry_poller, "~> 1.0"},
       {:gettext, "~> 0.20"},
       {:jason, "~> 1.2"},
-      {:plug_cowboy, "~> 2.5"}
+      {:plug_cowboy, "~> 2.5"},
+      {:ex_doc, "~> 0.34", only: [:dev, :docs], runtime: false},
+      {:earmark, "~> 1.4", only: [:dev, :docs], runtime: false},
+      {:makeup_elixir, "~> 0.16", only: [:dev, :docs], runtime: false}
     ]
   end
 
