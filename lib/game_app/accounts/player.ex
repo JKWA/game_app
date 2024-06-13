@@ -15,31 +15,16 @@ defmodule GameApp.Accounts.Player do
     |> cast(attrs, [:name, :email, :score])
     |> validate_required([:name, :email])
     |> validate_email()
+    |> unique_constraint(:email)
     |> put_change_if_nil(:score, 0)
     |> validate_score_non_negative()
   end
 
   def update_changeset(player, attrs \\ %{}) do
     player
-    |> cast(attrs, [:name, :email, :score])
-    |> validate_required([:name, :email, :score])
-    |> validate_email()
-    |> validate_score_increase()
-    |> validate_score_non_negative()
-  end
-
-  def update_email_changeset(player, attrs) do
-    player
-    |> cast(attrs, [:email])
-    |> validate_email()
-  end
-
-  def update_score_changeset(player, attrs) do
-    player
-    |> cast(attrs, [:score])
-    |> validate_required([:score])
-    |> validate_score_increase()
-    |> validate_score_non_negative()
+    |> cast(attrs, [:name, :score])
+    |> validate_required([:name, :score])
+    |> validate_score_not_decrease()
   end
 
   defp validate_email(changeset) do
@@ -53,7 +38,7 @@ defmodule GameApp.Accounts.Player do
     )
   end
 
-  defp validate_score_increase(changeset) do
+  defp validate_score_not_decrease(changeset) do
     original_score = changeset.data.score
     update_score = get_change(changeset, :score, original_score)
 

@@ -61,7 +61,7 @@ defmodule GameAppWeb.PlayerLive.FormComponent do
   end
 
   defp save_player(socket, :edit, player_params) do
-    case Accounts.update_player(socket.assigns.player, player_params) do
+    case Accounts.update_player!(socket.assigns.player, player_params) do
       {:ok, player} ->
         notify_parent({:saved, player})
 

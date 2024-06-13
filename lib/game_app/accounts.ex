@@ -90,9 +90,9 @@ defmodule GameApp.Accounts do
   end
 
   @doc """
-  Updates a player, ensuring that the score only increases.
+  Updates a player with the given attributes.
 
-  This function updates a player's attributes while specifically ensuring that the player's score is updated to the maximum value between the existing score and any new score provided. If no new score is provided or the provided score is less than the current score, the current score is maintained.
+  This function updates a player's attributes and ensures the changes are applied correctly within a database transaction. If any attribute, including `score`, needs to be updated, the function will validate and persist those changes. The function will raise an error if the update fails.
 
   ## Parameters
 
@@ -101,37 +101,27 @@ defmodule GameApp.Accounts do
 
   ## Examples
 
-      # When a higher score is provided
-      iex> update_player(player, %{"score" => "30"})
-      {:ok, %Player{score: 30}}
+      # When valid attributes are provided
+      iex> update_player!(player, %{"score" => "30", "name" => "John"})
+      %Player{score: 30, name: "John"}
 
-      # When a lower or equal score is provided
-      iex> update_player(player, %{"score" => "15"})
-      {:ok, %Player{score: 20}} # Assuming the current score was 20
-
-      # When a non-integer score is provided
-      iex> update_player(player, %{"score" => "bad_value"})
-      {:error, %Ecto.Changeset{}}
+      # When invalid attributes are provided
+      iex> update_player!(player, %{"score" => "bad_value"})
+      ** (Ecto.ChangeError) value `"bad_value"` for `Player.score` in `update` does not match type :integer
 
   ## Returns
 
-  - `{:ok, %Player{}}`: Successfully updated player.
-  - `{:error, %Ecto.Changeset{}}`: The changeset did not validate or could not be saved to the database.
+  - `%Player{}`: Successfully updated player.
+  - Raises an error if the update fails.
 
   """
-  def update_player(%Player{} = player, attrs) do
+  def update_player!(%Player{} = player, attrs) do
     Repo.transaction(fn ->
       current_player = Repo.get!(Player, player.id)
-      current_score = current_player.score
-
-      new_score = attrs["score"] |> String.to_integer()
-
-      max_score = max(current_score, new_score)
 
       changeset =
-        player
+        current_player
         |> Player.update_changeset(attrs)
-        |> Ecto.Changeset.put_change(:score, max_score)
 
       Repo.update!(changeset)
     end)
