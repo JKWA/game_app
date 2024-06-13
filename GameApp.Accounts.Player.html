@@ -14,7 +14,7 @@
 
     <script src="dist/handlebars.runtime-NWIB6V2M.js"></script>
     <script src="dist/handlebars.templates-K7URE6B4.js"></script>
-    <script src="dist/sidebar_items-CE3EC49E.js"></script>
+    <script src="dist/sidebar_items-CCB9E6E9.js"></script>
     <script src="docs_config.js"></script>
     <script async src="dist/html-Q4PYR6ZR.js"></script>
 
@@ -118,6 +118,10 @@ Pages
   </h1>
 
 
+    <section id="moduledoc">
+<p>Provides the schema and changesets for player accounts within the <a href="GameApp.html"><code class="inline">GameApp</code></a>.</p>
+    </section>
+
 </div>
 
   <section id="summary" class="details-list">
@@ -134,9 +138,21 @@ Pages
 
     <div class="summary-row">
       <div class="summary-signature">
+        <a href="#__struct__/0" data-no-tooltip translate="no">%GameApp.Accounts.Player{}</a>
+
+      </div>
+
+        <div class="summary-synopsis"><p>Defines the Ecto schema for the <code class="inline">players</code> table in the database.</p></div>
+
+    </div>
+
+    <div class="summary-row">
+      <div class="summary-signature">
         <a href="#create_changeset/1" data-no-tooltip translate="no">create_changeset(attrs)</a>
 
       </div>
+
+        <div class="summary-synopsis"><p>Creates a changeset for a new player with validations for required fields, email format, and score.</p></div>
 
     </div>
 
@@ -145,6 +161,8 @@ Pages
         <a href="#update_changeset/2" data-no-tooltip translate="no">update_changeset(player, attrs \\ %{})</a>
 
       </div>
+
+        <div class="summary-synopsis"><p>Creates a changeset for updating an existing player with validations for score not decreasing.</p></div>
 
     </div>
 
@@ -161,6 +179,31 @@ Pages
       <span class="text">Functions</span>
     </h1>
     <div class="functions-list">
+<section class="detail" id="__struct__/0">
+
+  <div class="detail-header">
+    <a href="#__struct__/0" class="detail-link" data-no-tooltip title="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature" translate="no">%GameApp.Accounts.Player{}</h1>
+
+
+      <span class="note">(struct)</span>
+
+  </div>
+
+  <section class="docstring">
+
+<p>Defines the Ecto schema for the <code class="inline">players</code> table in the database.</p><h2 id="__struct__/0-schema-fields" class="section-heading">
+  <a href="#__struct__/0-schema-fields" class="hover-link">
+    <i class="ri-link-m" aria-hidden="true"></i>
+  </a>
+  <span class="text">Schema fields</span>
+</h2>
+<ul><li><code class="inline">:name</code> - The player's name (String).</li><li><code class="inline">:email</code> - The player's email address (String).</li><li><code class="inline">:score</code> - The player's game score (Integer), defaults to 0.</li><li><code class="inline">timestamps</code> - Automatically managed fields for created_at and updated_at.</li></ul>
+  </section>
+</section>
 <section class="detail" id="create_changeset/1">
 
   <div class="detail-header">
@@ -175,7 +218,19 @@ Pages
 
   <section class="docstring">
 
-
+<p>Creates a changeset for a new player with validations for required fields, email format, and score.</p><h2 id="create_changeset/1-parameters" class="section-heading">
+  <a href="#create_changeset/1-parameters" class="hover-link">
+    <i class="ri-link-m" aria-hidden="true"></i>
+  </a>
+  <span class="text">Parameters</span>
+</h2>
+<ul><li><code class="inline">attrs</code>: Map of attributes for the new player.</li></ul><h2 id="create_changeset/1-returns" class="section-heading">
+  <a href="#create_changeset/1-returns" class="hover-link">
+    <i class="ri-link-m" aria-hidden="true"></i>
+  </a>
+  <span class="text">Returns</span>
+</h2>
+<ul><li>A <a href="https://hexdocs.pm/ecto/3.11.2/Ecto.Changeset.html"><code class="inline">Ecto.Changeset</code></a> struct ready for insertion.</li></ul>
   </section>
 </section>
 <section class="detail" id="update_changeset/2">
@@ -194,7 +249,19 @@ Pages
 
   <section class="docstring">
 
-
+<p>Creates a changeset for updating an existing player with validations for score not decreasing.</p><h2 id="update_changeset/2-parameters" class="section-heading">
+  <a href="#update_changeset/2-parameters" class="hover-link">
+    <i class="ri-link-m" aria-hidden="true"></i>
+  </a>
+  <span class="text">Parameters</span>
+</h2>
+<ul><li><code class="inline">player</code>: The existing player record.</li><li><code class="inline">attrs</code>: (Optional) Map of attributes to update.</li></ul><h2 id="update_changeset/2-returns" class="section-heading">
+  <a href="#update_changeset/2-returns" class="hover-link">
+    <i class="ri-link-m" aria-hidden="true"></i>
+  </a>
+  <span class="text">Returns</span>
+</h2>
+<ul><li>A <a href="https://hexdocs.pm/ecto/3.11.2/Ecto.Changeset.html"><code class="inline">Ecto.Changeset</code></a> struct ready for updating.</li></ul>
   </section>
 </section>
 
