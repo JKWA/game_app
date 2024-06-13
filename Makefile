@@ -17,6 +17,12 @@ setup.dev:
 	MIX_ENV=dev mix ecto.create
 	@echo "Running migrations for development environment..."
 	MIX_ENV=dev mix ecto.migrate
+	@echo "Adding dialyzer..."
+	MIX_ENV=dev mix dialyzer --plt
+
+analyze.dev:
+	@echo "Analyzing code for development environment..."
+	MIX_ENV=dev mix dialyzer
 
 migrate.dev:
 	@echo "Running migrations for development environment..."

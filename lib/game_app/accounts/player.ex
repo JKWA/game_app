@@ -6,6 +6,9 @@ defmodule GameApp.Accounts.Player do
   Provides the schema and changesets for player accounts within the `GameApp`.
   """
 
+  @typedoc """
+  Type representing the player struct with fields id, name, email, score, inserted_at, and updated_at.
+  """
   @doc """
   Defines the Ecto schema for the `players` table in the database.
 
@@ -15,6 +18,15 @@ defmodule GameApp.Accounts.Player do
   - `:score` - The player's game score (Integer), defaults to 0.
   - `timestamps` - Automatically managed fields for created_at and updated_at.
   """
+
+  @type t :: %__MODULE__{
+          id: integer(),
+          name: String.t(),
+          email: String.t(),
+          score: integer(),
+          inserted_at: NaiveDateTime.t(),
+          updated_at: NaiveDateTime.t()
+        }
   schema "players" do
     field :name, :string
     field :email, :string
@@ -32,6 +44,7 @@ defmodule GameApp.Accounts.Player do
   ## Returns
   - A `Ecto.Changeset` struct ready for insertion.
   """
+  @spec create_changeset(map()) :: Ecto.Changeset.t()
   def create_changeset(attrs) do
     %__MODULE__{}
     |> cast(attrs, [:name, :email, :score])
@@ -52,6 +65,7 @@ defmodule GameApp.Accounts.Player do
   ## Returns
   - A `Ecto.Changeset` struct ready for updating.
   """
+  @spec update_changeset(t(), map()) :: Ecto.Changeset.t()
   def update_changeset(player, attrs \\ %{}) do
     player
     |> cast(attrs, [:name, :score])
@@ -59,10 +73,12 @@ defmodule GameApp.Accounts.Player do
     |> validate_score_not_decrease()
   end
 
+  @spec validate_email(Ecto.Changeset.t()) :: Ecto.Changeset.t()
   defp validate_email(changeset) do
     validate_format(changeset, :email, ~r/@/, message: "must contain @")
   end
 
+  @spec validate_score_non_negative(Ecto.Changeset.t()) :: Ecto.Changeset.t()
   defp validate_score_non_negative(changeset) do
     validate_number(changeset, :score,
       greater_than_or_equal_to: 0,
@@ -70,6 +86,7 @@ defmodule GameApp.Accounts.Player do
     )
   end
 
+  @spec validate_score_not_decrease(Ecto.Changeset.t()) :: Ecto.Changeset.t()
   defp validate_score_not_decrease(changeset) do
     original_score = changeset.data.score
     update_score = get_change(changeset, :score, original_score)
@@ -89,6 +106,7 @@ defmodule GameApp.Accounts.Player do
     end
   end
 
+  @spec put_change_if_nil(Ecto.Changeset.t(), atom(), any()) :: Ecto.Changeset.t()
   defp put_change_if_nil(changeset, field, value) do
     current_value = get_field(changeset, field)
 

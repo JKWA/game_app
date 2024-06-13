@@ -25,7 +25,7 @@ defmodule GameApp.Accounts do
   - A list of `%Player{}` structs: This could be an empty list if no players are present in the database.
 
   """
-
+  @spec list_players() :: [Player.t()]
   def list_players do
     Repo.all(Player)
   end
@@ -55,6 +55,9 @@ defmodule GameApp.Accounts do
   - Raises `Ecto.NoResultsError` if no player with the given ID exists.
 
   """
+  @spec get_player!(integer()) :: Player.t() | no_return()
+  def get_player!(id), do: Repo.get!(Player, id)
+
   def get_player!(id), do: Repo.get!(Player, id)
 
   @doc """
@@ -82,7 +85,7 @@ defmodule GameApp.Accounts do
   - `{:error, %Ecto.Changeset{}}`: The changeset did not validate or could not be saved to the database.
 
   """
-
+  @spec create_player(map()) :: {:ok, Player.t()} | {:error, Ecto.Changeset.t()}
   def create_player(attrs \\ %{}) do
     attrs
     |> Player.create_changeset()
@@ -115,6 +118,7 @@ defmodule GameApp.Accounts do
   - Raises an error if the update fails.
 
   """
+  @spec update_player!(Player.t(), map()) :: Player.t() | no_return()
   def update_player!(%Player{} = player, attrs) do
     Repo.transaction(fn ->
       current_player = Repo.get!(Player, player.id)
@@ -152,6 +156,7 @@ defmodule GameApp.Accounts do
   - `{:error, changeset}`: The deletion failed due to a constraint or the player does not exist.
 
   """
+  @spec delete_player(Player.t()) :: {:ok, Player.t()} | {:error, Ecto.Changeset.t()}
   def delete_player(%Player{} = player) do
     Repo.delete(player)
   end
