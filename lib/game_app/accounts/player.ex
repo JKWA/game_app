@@ -2,6 +2,19 @@ defmodule GameApp.Accounts.Player do
   use Ecto.Schema
   import Ecto.Changeset
 
+  @moduledoc """
+  Provides the schema and changesets for player accounts within the `GameApp`.
+  """
+
+  @doc """
+  Defines the Ecto schema for the `players` table in the database.
+
+  ## Schema fields
+  - `:name` - The player's name (String).
+  - `:email` - The player's email address (String).
+  - `:score` - The player's game score (Integer), defaults to 0.
+  - `timestamps` - Automatically managed fields for created_at and updated_at.
+  """
   schema "players" do
     field :name, :string
     field :email, :string
@@ -10,6 +23,15 @@ defmodule GameApp.Accounts.Player do
     timestamps()
   end
 
+  @doc """
+  Creates a changeset for a new player with validations for required fields, email format, and score.
+
+  ## Parameters
+  - `attrs`: Map of attributes for the new player.
+
+  ## Returns
+  - A `Ecto.Changeset` struct ready for insertion.
+  """
   def create_changeset(attrs) do
     %__MODULE__{}
     |> cast(attrs, [:name, :email, :score])
@@ -20,6 +42,16 @@ defmodule GameApp.Accounts.Player do
     |> validate_score_non_negative()
   end
 
+  @doc """
+  Creates a changeset for updating an existing player with validations for score not decreasing.
+
+  ## Parameters
+  - `player`: The existing player record.
+  - `attrs`: (Optional) Map of attributes to update.
+
+  ## Returns
+  - A `Ecto.Changeset` struct ready for updating.
+  """
   def update_changeset(player, attrs \\ %{}) do
     player
     |> cast(attrs, [:name, :score])
