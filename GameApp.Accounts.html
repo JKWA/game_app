@@ -14,7 +14,7 @@
 
     <script src="dist/handlebars.runtime-NWIB6V2M.js"></script>
     <script src="dist/handlebars.templates-K7URE6B4.js"></script>
-    <script src="dist/sidebar_items-5D983453.js"></script>
+    <script src="dist/sidebar_items-49F87336.js"></script>
     <script src="docs_config.js"></script>
     <script async src="dist/html-Q4PYR6ZR.js"></script>
 
@@ -158,6 +158,16 @@ Pages
 
     <div class="summary-row">
       <div class="summary-signature">
+        <a href="#get_player/1" data-no-tooltip translate="no">get_player(id)</a>
+
+      </div>
+
+        <div class="summary-synopsis"><p>Fetches a player by ID from the database.</p></div>
+
+    </div>
+
+    <div class="summary-row">
+      <div class="summary-signature">
         <a href="#get_player!/1" data-no-tooltip translate="no">get_player!(id)</a>
 
       </div>
@@ -178,11 +188,21 @@ Pages
 
     <div class="summary-row">
       <div class="summary-signature">
+        <a href="#update_player/2" data-no-tooltip translate="no">update_player(player, attrs)</a>
+
+      </div>
+
+        <div class="summary-synopsis"><p>Updates a player record with the given attributes.</p></div>
+
+    </div>
+
+    <div class="summary-row">
+      <div class="summary-signature">
         <a href="#update_player!/2" data-no-tooltip translate="no">update_player!(player, attrs)</a>
 
       </div>
 
-        <div class="summary-synopsis"><p>Updates a player with the given attributes.</p></div>
+        <div class="summary-synopsis"><p>Updates a player record with the given attributes.</p></div>
 
     </div>
 
@@ -235,12 +255,12 @@ Pages
   <span class="text">Examples</span>
 </h2>
 <pre><code class="makeup elixir" translate="no"><span class="c1"># Creating a player with valid attributes</span><span class="w">
-</span><span class="gp unselectable">iex&gt; </span><span class="n">create_player</span><span class="p" data-group-id="8113485622-1">(</span><span class="p" data-group-id="8113485622-2">%{</span><span class="s">&quot;name&quot;</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="s">&quot;John Doe&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;email&quot;</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="s">&quot;john@example.com&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;score&quot;</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="s">&quot;20&quot;</span><span class="p" data-group-id="8113485622-2">}</span><span class="p" data-group-id="8113485622-1">)</span><span class="w">
-</span><span class="p" data-group-id="8113485622-3">{</span><span class="ss">:ok</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="8113485622-4">%</span><span class="nc" data-group-id="8113485622-4">Player</span><span class="p" data-group-id="8113485622-4">{</span><span class="ss">name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;John Doe&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">email</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;john@example.com&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">score</span><span class="p">:</span><span class="w"> </span><span class="mi">20</span><span class="p" data-group-id="8113485622-4">}</span><span class="p" data-group-id="8113485622-3">}</span><span class="w">
+</span><span class="gp unselectable">iex&gt; </span><span class="n">create_player</span><span class="p" data-group-id="7918609484-1">(</span><span class="p" data-group-id="7918609484-2">%{</span><span class="s">&quot;name&quot;</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="s">&quot;John Doe&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;email&quot;</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="s">&quot;john@example.com&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;score&quot;</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="s">&quot;20&quot;</span><span class="p" data-group-id="7918609484-2">}</span><span class="p" data-group-id="7918609484-1">)</span><span class="w">
+</span><span class="p" data-group-id="7918609484-3">{</span><span class="ss">:ok</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="7918609484-4">%</span><span class="nc" data-group-id="7918609484-4">Player</span><span class="p" data-group-id="7918609484-4">{</span><span class="ss">name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;John Doe&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">email</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;john@example.com&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">score</span><span class="p">:</span><span class="w"> </span><span class="mi">20</span><span class="p" data-group-id="7918609484-4">}</span><span class="p" data-group-id="7918609484-3">}</span><span class="w">
 
 </span><span class="c1"># Attempting to create a player with invalid attributes</span><span class="w">
-</span><span class="gp unselectable">iex&gt; </span><span class="n">create_player</span><span class="p" data-group-id="8113485622-5">(</span><span class="p" data-group-id="8113485622-6">%{</span><span class="s">&quot;name&quot;</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="no">nil</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;email&quot;</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="s">&quot;john@example.com&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;score&quot;</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="s">&quot;20&quot;</span><span class="p" data-group-id="8113485622-6">}</span><span class="p" data-group-id="8113485622-5">)</span><span class="w">
-</span><span class="p" data-group-id="8113485622-7">{</span><span class="ss">:error</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="8113485622-8">%</span><span class="nc" data-group-id="8113485622-8">Ecto.Changeset</span><span class="p" data-group-id="8113485622-8">{</span><span class="ss">errors</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="8113485622-9">[</span><span class="ss">name</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="8113485622-10">{</span><span class="s">&quot;can&#39;t be blank&quot;</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="8113485622-11">[</span><span class="ss">validation</span><span class="p">:</span><span class="w"> </span><span class="ss">:required</span><span class="p" data-group-id="8113485622-11">]</span><span class="p" data-group-id="8113485622-10">}</span><span class="p" data-group-id="8113485622-9">]</span><span class="p" data-group-id="8113485622-8">}</span><span class="p" data-group-id="8113485622-7">}</span></code></pre><h2 id="create_player/1-returns" class="section-heading">
+</span><span class="gp unselectable">iex&gt; </span><span class="n">create_player</span><span class="p" data-group-id="7918609484-5">(</span><span class="p" data-group-id="7918609484-6">%{</span><span class="s">&quot;name&quot;</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="no">nil</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;email&quot;</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="s">&quot;john@example.com&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;score&quot;</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="s">&quot;20&quot;</span><span class="p" data-group-id="7918609484-6">}</span><span class="p" data-group-id="7918609484-5">)</span><span class="w">
+</span><span class="p" data-group-id="7918609484-7">{</span><span class="ss">:error</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="7918609484-8">%</span><span class="nc" data-group-id="7918609484-8">Ecto.Changeset</span><span class="p" data-group-id="7918609484-8">{</span><span class="ss">errors</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="7918609484-9">[</span><span class="ss">name</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="7918609484-10">{</span><span class="s">&quot;can&#39;t be blank&quot;</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="7918609484-11">[</span><span class="ss">validation</span><span class="p">:</span><span class="w"> </span><span class="ss">:required</span><span class="p" data-group-id="7918609484-11">]</span><span class="p" data-group-id="7918609484-10">}</span><span class="p" data-group-id="7918609484-9">]</span><span class="p" data-group-id="7918609484-8">}</span><span class="p" data-group-id="7918609484-7">}</span></code></pre><h2 id="create_player/1-returns" class="section-heading">
   <a href="#create_player/1-returns" class="hover-link">
     <i class="ri-link-m" aria-hidden="true"></i>
   </a>
@@ -283,18 +303,65 @@ Pages
   <span class="text">Examples</span>
 </h2>
 <pre><code class="makeup elixir" translate="no"><span class="c1"># Deleting a player with a valid struct</span><span class="w">
-</span><span class="gp unselectable">iex&gt; </span><span class="n">delete_player</span><span class="p" data-group-id="7057364231-1">(</span><span class="n">player</span><span class="p" data-group-id="7057364231-1">)</span><span class="w">
-</span><span class="p" data-group-id="7057364231-2">{</span><span class="ss">:ok</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="7057364231-3">%</span><span class="nc" data-group-id="7057364231-3">Player</span><span class="p" data-group-id="7057364231-3">{</span><span class="ss">id</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="ss">name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Charlie&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">email</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;charlie@example.com&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">score</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="p" data-group-id="7057364231-3">}</span><span class="p" data-group-id="7057364231-2">}</span><span class="w">
+</span><span class="gp unselectable">iex&gt; </span><span class="n">delete_player</span><span class="p" data-group-id="4607813689-1">(</span><span class="n">player</span><span class="p" data-group-id="4607813689-1">)</span><span class="w">
+</span><span class="p" data-group-id="4607813689-2">{</span><span class="ss">:ok</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="4607813689-3">%</span><span class="nc" data-group-id="4607813689-3">Player</span><span class="p" data-group-id="4607813689-3">{</span><span class="ss">id</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="ss">name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Charlie&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">email</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;charlie@example.com&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">score</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="p" data-group-id="4607813689-3">}</span><span class="p" data-group-id="4607813689-2">}</span><span class="w">
 
 </span><span class="c1"># Attempting to delete a player that does not exist or has constraints preventing deletion</span><span class="w">
-</span><span class="gp unselectable">iex&gt; </span><span class="n">delete_player</span><span class="p" data-group-id="7057364231-4">(</span><span class="n">non_existent_player</span><span class="p" data-group-id="7057364231-4">)</span><span class="w">
-</span><span class="p" data-group-id="7057364231-5">{</span><span class="ss">:error</span><span class="p">,</span><span class="w"> </span><span class="n">changeset</span><span class="p" data-group-id="7057364231-5">}</span></code></pre><h2 id="delete_player/1-returns" class="section-heading">
+</span><span class="gp unselectable">iex&gt; </span><span class="n">delete_player</span><span class="p" data-group-id="4607813689-4">(</span><span class="n">non_existent_player</span><span class="p" data-group-id="4607813689-4">)</span><span class="w">
+</span><span class="p" data-group-id="4607813689-5">{</span><span class="ss">:error</span><span class="p">,</span><span class="w"> </span><span class="n">changeset</span><span class="p" data-group-id="4607813689-5">}</span></code></pre><h2 id="delete_player/1-returns" class="section-heading">
   <a href="#delete_player/1-returns" class="hover-link">
     <i class="ri-link-m" aria-hidden="true"></i>
   </a>
   <span class="text">Returns</span>
 </h2>
 <ul><li><code class="inline">{:ok, %Player{}}</code>: Successfully deleted player.</li><li><code class="inline">{:error, changeset}</code>: The deletion failed due to a constraint or the player does not exist.</li></ul>
+  </section>
+</section>
+<section class="detail" id="get_player/1">
+
+  <div class="detail-header">
+    <a href="#get_player/1" class="detail-link" data-no-tooltip title="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature" translate="no">get_player(id)</h1>
+
+
+  </div>
+
+  <section class="docstring">
+
+      <div class="specs">
+
+          <pre translate="no"><span class="attribute">@spec</span> get_player(<a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">integer</a>()) :: {:ok, <a href="GameApp.Accounts.Player.html#t:t/0">GameApp.Accounts.Player.t</a>()} | {:none}</pre>
+
+      </div>
+
+<p>Fetches a player by ID from the database.</p><p>This function retrieves a player based on the provided ID. It directly queries the Player table in the database. If a player with the specified ID exists, it returns <code class="inline">{:ok, player}</code>. If no player with such ID exists, it returns <code class="inline">{:none}</code>.</p><h2 id="get_player/1-parameters" class="section-heading">
+  <a href="#get_player/1-parameters" class="hover-link">
+    <i class="ri-link-m" aria-hidden="true"></i>
+  </a>
+  <span class="text">Parameters</span>
+</h2>
+<ul><li><code class="inline">id</code>: The ID of the player to retrieve. Typically, this is an integer value.</li></ul><h2 id="get_player/1-examples" class="section-heading">
+  <a href="#get_player/1-examples" class="hover-link">
+    <i class="ri-link-m" aria-hidden="true"></i>
+  </a>
+  <span class="text">Examples</span>
+</h2>
+<pre><code class="makeup elixir" translate="no"><span class="c1"># Fetching a player with a valid ID</span><span class="w">
+</span><span class="gp unselectable">iex&gt; </span><span class="n">get_player</span><span class="p" data-group-id="6090296402-1">(</span><span class="mi">5</span><span class="p" data-group-id="6090296402-1">)</span><span class="w">
+</span><span class="p" data-group-id="6090296402-2">{</span><span class="ss">:ok</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="6090296402-3">%</span><span class="nc" data-group-id="6090296402-3">Player</span><span class="p" data-group-id="6090296402-3">{</span><span class="ss">id</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="ss">name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Alice&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">email</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;alice@example.com&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">score</span><span class="p">:</span><span class="w"> </span><span class="mi">15</span><span class="p" data-group-id="6090296402-3">}</span><span class="p" data-group-id="6090296402-2">}</span><span class="w">
+
+</span><span class="c1"># Attempting to fetch a player with a non-existing ID</span><span class="w">
+</span><span class="gp unselectable">iex&gt; </span><span class="n">get_player</span><span class="p" data-group-id="6090296402-4">(</span><span class="mi">9999</span><span class="p" data-group-id="6090296402-4">)</span><span class="w">
+</span><span class="p" data-group-id="6090296402-5">{</span><span class="ss">:none</span><span class="p" data-group-id="6090296402-5">}</span></code></pre><h2 id="get_player/1-returns" class="section-heading">
+  <a href="#get_player/1-returns" class="hover-link">
+    <i class="ri-link-m" aria-hidden="true"></i>
+  </a>
+  <span class="text">Returns</span>
+</h2>
+<ul><li><code class="inline">{:ok, %Player{}}</code>: The player record if found.</li><li><code class="inline">{:none}</code>: If no player with the given ID exists.</li></ul>
   </section>
 </section>
 <section class="detail" id="get_player!/1">
@@ -313,7 +380,7 @@ Pages
 
       <div class="specs">
 
-          <pre translate="no"><span class="attribute">@spec</span> get_player!(<a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">integer</a>()) :: <a href="GameApp.Accounts.Player.html#t:t/0">GameApp.Accounts.Player.t</a>() | <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">no_return</a>()</pre>
+          <pre translate="no"><span class="attribute">@spec</span> get_player!(<a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">integer</a>()) :: <a href="GameApp.Accounts.Player.html#t:t/0">GameApp.Accounts.Player.t</a>()</pre>
 
       </div>
 
@@ -330,11 +397,11 @@ Pages
   <span class="text">Examples</span>
 </h2>
 <pre><code class="makeup elixir" translate="no"><span class="c1"># Fetching a player with a valid ID</span><span class="w">
-</span><span class="gp unselectable">iex&gt; </span><span class="n">get_player!</span><span class="p" data-group-id="2265429904-1">(</span><span class="mi">5</span><span class="p" data-group-id="2265429904-1">)</span><span class="w">
-</span><span class="p" data-group-id="2265429904-2">%</span><span class="nc" data-group-id="2265429904-2">Player</span><span class="p" data-group-id="2265429904-2">{</span><span class="ss">id</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="ss">name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Alice&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">email</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;alice@example.com&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">score</span><span class="p">:</span><span class="w"> </span><span class="mi">15</span><span class="p" data-group-id="2265429904-2">}</span><span class="w">
+</span><span class="gp unselectable">iex&gt; </span><span class="n">get_player!</span><span class="p" data-group-id="0641278456-1">(</span><span class="mi">5</span><span class="p" data-group-id="0641278456-1">)</span><span class="w">
+</span><span class="p" data-group-id="0641278456-2">%</span><span class="nc" data-group-id="0641278456-2">Player</span><span class="p" data-group-id="0641278456-2">{</span><span class="ss">id</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="ss">name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Alice&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">email</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;alice@example.com&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">score</span><span class="p">:</span><span class="w"> </span><span class="mi">15</span><span class="p" data-group-id="0641278456-2">}</span><span class="w">
 
 </span><span class="c1"># Attempting to fetch a player with a non-existing ID</span><span class="w">
-</span><span class="gp unselectable">iex&gt; </span><span class="n">get_player!</span><span class="p" data-group-id="2265429904-3">(</span><span class="mi">9999</span><span class="p" data-group-id="2265429904-3">)</span><span class="w">
+</span><span class="gp unselectable">iex&gt; </span><span class="n">get_player!</span><span class="p" data-group-id="0641278456-3">(</span><span class="mi">9999</span><span class="p" data-group-id="0641278456-3">)</span><span class="w">
 </span><span class="gt">** (Ecto.NoResultsError)</span></code></pre><h2 id="get_player!/1-returns" class="section-heading">
   <a href="#get_player!/1-returns" class="hover-link">
     <i class="ri-link-m" aria-hidden="true"></i>
@@ -371,15 +438,67 @@ Pages
   <span class="text">Examples</span>
 </h2>
 <pre><code class="makeup elixir" translate="no"><span class="c1"># Getting a list of all players</span><span class="w">
-</span><span class="gp unselectable">iex&gt; </span><span class="n">list_players</span><span class="p" data-group-id="2963812093-1">(</span><span class="p" data-group-id="2963812093-1">)</span><span class="w">
-</span><span class="p" data-group-id="2963812093-2">[</span><span class="p" data-group-id="2963812093-3">%</span><span class="nc" data-group-id="2963812093-3">Player</span><span class="p" data-group-id="2963812093-3">{</span><span class="ss">id</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="ss">name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Alice&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">email</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;alice@example.com&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">score</span><span class="p">:</span><span class="w"> </span><span class="mi">15</span><span class="p" data-group-id="2963812093-3">}</span><span class="p">,</span><span class="w">
- </span><span class="p" data-group-id="2963812093-4">%</span><span class="nc" data-group-id="2963812093-4">Player</span><span class="p" data-group-id="2963812093-4">{</span><span class="ss">id</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="ss">name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Bob&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">email</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;bob@example.com&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">score</span><span class="p">:</span><span class="w"> </span><span class="mi">12</span><span class="p" data-group-id="2963812093-4">}</span><span class="p" data-group-id="2963812093-2">]</span></code></pre><h2 id="list_players/0-returns" class="section-heading">
+</span><span class="gp unselectable">iex&gt; </span><span class="n">list_players</span><span class="p" data-group-id="5505551960-1">(</span><span class="p" data-group-id="5505551960-1">)</span><span class="w">
+</span><span class="p" data-group-id="5505551960-2">[</span><span class="p" data-group-id="5505551960-3">%</span><span class="nc" data-group-id="5505551960-3">Player</span><span class="p" data-group-id="5505551960-3">{</span><span class="ss">id</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="ss">name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Alice&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">email</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;alice@example.com&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">score</span><span class="p">:</span><span class="w"> </span><span class="mi">15</span><span class="p" data-group-id="5505551960-3">}</span><span class="p">,</span><span class="w">
+ </span><span class="p" data-group-id="5505551960-4">%</span><span class="nc" data-group-id="5505551960-4">Player</span><span class="p" data-group-id="5505551960-4">{</span><span class="ss">id</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="ss">name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Bob&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">email</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;bob@example.com&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">score</span><span class="p">:</span><span class="w"> </span><span class="mi">12</span><span class="p" data-group-id="5505551960-4">}</span><span class="p" data-group-id="5505551960-2">]</span></code></pre><h2 id="list_players/0-returns" class="section-heading">
   <a href="#list_players/0-returns" class="hover-link">
     <i class="ri-link-m" aria-hidden="true"></i>
   </a>
   <span class="text">Returns</span>
 </h2>
 <ul><li>A list of <code class="inline">%Player{}</code> structs: This could be an empty list if no players are present in the database.</li></ul>
+  </section>
+</section>
+<section class="detail" id="update_player/2">
+
+  <div class="detail-header">
+    <a href="#update_player/2" class="detail-link" data-no-tooltip title="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature" translate="no">update_player(player, attrs)</h1>
+
+
+  </div>
+
+  <section class="docstring">
+
+      <div class="specs">
+
+          <pre translate="no"><span class="attribute">@spec</span> update_player(<a href="GameApp.Accounts.Player.html#t:t/0">GameApp.Accounts.Player.t</a>(), <a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">map</a>()) ::
+  {:ok, <a href="GameApp.Accounts.Player.html#t:t/0">GameApp.Accounts.Player.t</a>()} | {:error, <a href="https://hexdocs.pm/ecto/3.11.2/Ecto.Changeset.html#t:t/0">Ecto.Changeset.t</a>()} | {:none}</pre>
+
+      </div>
+
+<p>Updates a player record with the given attributes.</p><p>This function fetches the player by ID, applies the changes from the provided attributes, and attempts to update the player record in the database. If the player is found, it returns <code class="inline">{:ok, updated_player}</code>. If the player is not found, it returns <code class="inline">{:none}</code>. If the update fails due to validation errors, it returns <code class="inline">{:error, changeset}</code>.</p><h2 id="update_player/2-parameters" class="section-heading">
+  <a href="#update_player/2-parameters" class="hover-link">
+    <i class="ri-link-m" aria-hidden="true"></i>
+  </a>
+  <span class="text">Parameters</span>
+</h2>
+<ul><li><code class="inline">player</code>: The player struct to update.</li><li><code class="inline">attrs</code>: A map of attributes to update the player with.</li></ul><h2 id="update_player/2-examples" class="section-heading">
+  <a href="#update_player/2-examples" class="hover-link">
+    <i class="ri-link-m" aria-hidden="true"></i>
+  </a>
+  <span class="text">Examples</span>
+</h2>
+<pre><code class="makeup elixir" translate="no"><span class="c1"># Updating a player with valid attributes</span><span class="w">
+</span><span class="gp unselectable">iex&gt; </span><span class="n">update_player</span><span class="p" data-group-id="8867964273-1">(</span><span class="p" data-group-id="8867964273-2">%</span><span class="nc" data-group-id="8867964273-2">Player</span><span class="p" data-group-id="8867964273-2">{</span><span class="ss">id</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p" data-group-id="8867964273-2">}</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="8867964273-3">%{</span><span class="ss">name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Alice Updated&quot;</span><span class="p" data-group-id="8867964273-3">}</span><span class="p" data-group-id="8867964273-1">)</span><span class="w">
+</span><span class="p" data-group-id="8867964273-4">{</span><span class="ss">:ok</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="8867964273-5">%</span><span class="nc" data-group-id="8867964273-5">Player</span><span class="p" data-group-id="8867964273-5">{</span><span class="ss">id</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="ss">name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Alice Updated&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">email</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;alice@example.com&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">score</span><span class="p">:</span><span class="w"> </span><span class="mi">15</span><span class="p" data-group-id="8867964273-5">}</span><span class="p" data-group-id="8867964273-4">}</span><span class="w">
+
+</span><span class="c1"># Attempting to update a non-existing player</span><span class="w">
+</span><span class="gp unselectable">iex&gt; </span><span class="n">update_player</span><span class="p" data-group-id="8867964273-6">(</span><span class="p" data-group-id="8867964273-7">%</span><span class="nc" data-group-id="8867964273-7">Player</span><span class="p" data-group-id="8867964273-7">{</span><span class="ss">id</span><span class="p">:</span><span class="w"> </span><span class="mi">9999</span><span class="p" data-group-id="8867964273-7">}</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="8867964273-8">%{</span><span class="ss">name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Non-existing&quot;</span><span class="p" data-group-id="8867964273-8">}</span><span class="p" data-group-id="8867964273-6">)</span><span class="w">
+</span><span class="p" data-group-id="8867964273-9">{</span><span class="ss">:none</span><span class="p" data-group-id="8867964273-9">}</span><span class="w">
+
+</span><span class="c1"># Attempting to update a player with invalid attributes</span><span class="w">
+</span><span class="gp unselectable">iex&gt; </span><span class="n">update_player</span><span class="p" data-group-id="8867964273-10">(</span><span class="p" data-group-id="8867964273-11">%</span><span class="nc" data-group-id="8867964273-11">Player</span><span class="p" data-group-id="8867964273-11">{</span><span class="ss">id</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p" data-group-id="8867964273-11">}</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="8867964273-12">%{</span><span class="ss">email</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;invalid-email&quot;</span><span class="p" data-group-id="8867964273-12">}</span><span class="p" data-group-id="8867964273-10">)</span><span class="w">
+</span><span class="p" data-group-id="8867964273-13">{</span><span class="ss">:error</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="8867964273-14">%</span><span class="nc" data-group-id="8867964273-14">Ecto.Changeset</span><span class="p" data-group-id="8867964273-14">{</span><span class="p" data-group-id="8867964273-14">}</span><span class="p" data-group-id="8867964273-13">}</span></code></pre><h2 id="update_player/2-returns" class="section-heading">
+  <a href="#update_player/2-returns" class="hover-link">
+    <i class="ri-link-m" aria-hidden="true"></i>
+  </a>
+  <span class="text">Returns</span>
+</h2>
+<ul><li><code class="inline">{:ok, %Player{}}</code>: The updated player record if the update is successful.</li><li><code class="inline">{:none}</code>: If the player with the given ID does not exist.</li><li><code class="inline">{:error, %Ecto.Changeset{}}</code>: If the update fails due to validation errors.</li></ul>
   </section>
 </section>
 <section class="detail" id="update_player!/2">
@@ -399,35 +518,35 @@ Pages
       <div class="specs">
 
           <pre translate="no"><span class="attribute">@spec</span> update_player!(<a href="GameApp.Accounts.Player.html#t:t/0">GameApp.Accounts.Player.t</a>(), <a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">map</a>()) ::
-  <a href="GameApp.Accounts.Player.html#t:t/0">GameApp.Accounts.Player.t</a>() | <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">no_return</a>()</pre>
+  <a href="GameApp.Accounts.Player.html#t:t/0">GameApp.Accounts.Player.t</a>()</pre>
 
       </div>
 
-<p>Updates a player with the given attributes.</p><p>This function updates a player's attributes and ensures the changes are applied correctly within a database transaction. If any attribute, including <code class="inline">score</code>, needs to be updated, the function will validate and persist those changes. The function will raise an error if the update fails.</p><h2 id="update_player!/2-parameters" class="section-heading">
+<p>Updates a player record with the given attributes.</p><p>This function fetches the player by ID, applies the changes from the provided attributes, and updates the player record in the database. If the player is not found, it raises an <a href="https://hexdocs.pm/ecto/3.11.2/Ecto.NoResultsError.html"><code class="inline">Ecto.NoResultsError</code></a>. If the update fails, it raises an <a href="https://hexdocs.pm/ecto/3.11.2/Ecto.InvalidChangesetError.html"><code class="inline">Ecto.InvalidChangesetError</code></a>.</p><h2 id="update_player!/2-parameters" class="section-heading">
   <a href="#update_player!/2-parameters" class="hover-link">
     <i class="ri-link-m" aria-hidden="true"></i>
   </a>
   <span class="text">Parameters</span>
 </h2>
-<ul><li><code class="inline">player</code>: The <code class="inline">%Player{}</code> struct to be updated.</li><li><code class="inline">attrs</code>: A map of attributes to update. The <code class="inline">score</code> in <code class="inline">attrs</code> should be an integer or string that can be converted to an integer.</li></ul><h2 id="update_player!/2-examples" class="section-heading">
+<ul><li><code class="inline">player</code>: The player struct to update.</li><li><code class="inline">attrs</code>: A map of attributes to update the player with.</li></ul><h2 id="update_player!/2-examples" class="section-heading">
   <a href="#update_player!/2-examples" class="hover-link">
     <i class="ri-link-m" aria-hidden="true"></i>
   </a>
   <span class="text">Examples</span>
 </h2>
-<pre><code class="makeup elixir" translate="no"><span class="c1"># When valid attributes are provided</span><span class="w">
-</span><span class="gp unselectable">iex&gt; </span><span class="n">update_player!</span><span class="p" data-group-id="4657133329-1">(</span><span class="n">player</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="4657133329-2">%{</span><span class="s">&quot;score&quot;</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="s">&quot;30&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;name&quot;</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="s">&quot;John&quot;</span><span class="p" data-group-id="4657133329-2">}</span><span class="p" data-group-id="4657133329-1">)</span><span class="w">
-</span><span class="p" data-group-id="4657133329-3">%</span><span class="nc" data-group-id="4657133329-3">Player</span><span class="p" data-group-id="4657133329-3">{</span><span class="ss">score</span><span class="p">:</span><span class="w"> </span><span class="mi">30</span><span class="p">,</span><span class="w"> </span><span class="ss">name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;John&quot;</span><span class="p" data-group-id="4657133329-3">}</span><span class="w">
+<pre><code class="makeup elixir" translate="no"><span class="c1"># Updating a player with valid attributes</span><span class="w">
+</span><span class="gp unselectable">iex&gt; </span><span class="n">update_player!</span><span class="p" data-group-id="3166249029-1">(</span><span class="p" data-group-id="3166249029-2">%</span><span class="nc" data-group-id="3166249029-2">Player</span><span class="p" data-group-id="3166249029-2">{</span><span class="ss">id</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p" data-group-id="3166249029-2">}</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="3166249029-3">%{</span><span class="ss">name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Alice Updated&quot;</span><span class="p" data-group-id="3166249029-3">}</span><span class="p" data-group-id="3166249029-1">)</span><span class="w">
+</span><span class="p" data-group-id="3166249029-4">%</span><span class="nc" data-group-id="3166249029-4">Player</span><span class="p" data-group-id="3166249029-4">{</span><span class="ss">id</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="ss">name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Alice Updated&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">email</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;alice@example.com&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">score</span><span class="p">:</span><span class="w"> </span><span class="mi">15</span><span class="p" data-group-id="3166249029-4">}</span><span class="w">
 
-</span><span class="c1"># When invalid attributes are provided</span><span class="w">
-</span><span class="gp unselectable">iex&gt; </span><span class="n">update_player!</span><span class="p" data-group-id="4657133329-4">(</span><span class="n">player</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="4657133329-5">%{</span><span class="s">&quot;score&quot;</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="s">&quot;bad_value&quot;</span><span class="p" data-group-id="4657133329-5">}</span><span class="p" data-group-id="4657133329-4">)</span><span class="w">
-</span><span class="gt">** (Ecto.ChangeError) value `&quot;bad_value&quot;` for `Player.score` in `update` does not match type :integer</span></code></pre><h2 id="update_player!/2-returns" class="section-heading">
+</span><span class="c1"># Attempting to update a non-existing player</span><span class="w">
+</span><span class="gp unselectable">iex&gt; </span><span class="n">update_player!</span><span class="p" data-group-id="3166249029-5">(</span><span class="p" data-group-id="3166249029-6">%</span><span class="nc" data-group-id="3166249029-6">Player</span><span class="p" data-group-id="3166249029-6">{</span><span class="ss">id</span><span class="p">:</span><span class="w"> </span><span class="mi">9999</span><span class="p" data-group-id="3166249029-6">}</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="3166249029-7">%{</span><span class="ss">name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Non-existing&quot;</span><span class="p" data-group-id="3166249029-7">}</span><span class="p" data-group-id="3166249029-5">)</span><span class="w">
+</span><span class="gt">** (Ecto.NoResultsError)</span></code></pre><h2 id="update_player!/2-returns" class="section-heading">
   <a href="#update_player!/2-returns" class="hover-link">
     <i class="ri-link-m" aria-hidden="true"></i>
   </a>
   <span class="text">Returns</span>
 </h2>
-<ul><li><code class="inline">%Player{}</code>: Successfully updated player.</li><li>Raises an error if the update fails.</li></ul>
+<ul><li><code class="inline">%Player{}</code>: The updated player record.</li><li>Raises <a href="https://hexdocs.pm/ecto/3.11.2/Ecto.NoResultsError.html"><code class="inline">Ecto.NoResultsError</code></a> if the player with the given ID does not exist.</li><li>Raises <a href="https://hexdocs.pm/ecto/3.11.2/Ecto.InvalidChangesetError.html"><code class="inline">Ecto.InvalidChangesetError</code></a> if the update fails due to validation errors.</li></ul>
   </section>
 </section>
 
