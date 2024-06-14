@@ -1,4 +1,8 @@
 defmodule GameAppWeb.PlayerLive.Show do
+  @moduledoc """
+  LiveView module for displaying and player details.
+  """
+
   use GameAppWeb, :live_view
 
   alias GameApp.Accounts
@@ -9,11 +13,23 @@ defmodule GameAppWeb.PlayerLive.Show do
   end
 
   @impl true
+  @doc """
+  Handles parameter changes to the player ID, fetching the player data.
+  """
   def handle_params(%{"id" => id}, _, socket) do
-    {:noreply,
-     socket
-     |> assign(:page_title, page_title(socket.assigns.live_action))
-     |> assign(:player, Accounts.get_player!(id))}
+    case Accounts.get_player(id) do
+      {:ok, player} ->
+        {:noreply,
+         socket
+         |> assign(:page_title, page_title(socket.assigns.live_action))
+         |> assign(:player, player)}
+
+      {:none} ->
+        {:noreply,
+         socket
+         |> put_flash(:error, "Player not found")
+         |> push_redirect(to: "/players")}
+    end
   end
 
   defp page_title(:show), do: "Show Player"

@@ -1,8 +1,13 @@
 defmodule GameAppWeb.PlayerLive.FormComponent do
+  @moduledoc """
+  LiveView module for adding a new player and editing an player's details.
+  """
+
   use GameAppWeb, :live_component
 
   alias GameApp.Accounts
   alias GameApp.Accounts.Player
+  require Logger
 
   @impl true
   def render(assigns) do
@@ -43,15 +48,10 @@ defmodule GameAppWeb.PlayerLive.FormComponent do
 
   @impl true
   def handle_event("validate", %{"player" => player_params}, socket) do
-    IO.inspect(player_params, label: "Form values")
-    IO.inspect(socket.assigns.player, label: "Current values")
-
     changeset =
       socket.assigns.player
       |> Player.update_changeset(player_params)
       |> Map.put(:action, :validate)
-
-    IO.inspect(changeset, label: "Changeset")
 
     {:noreply, assign_form(socket, changeset)}
   end
@@ -61,17 +61,24 @@ defmodule GameAppWeb.PlayerLive.FormComponent do
   end
 
   defp save_player(socket, :edit, player_params) do
-    case Accounts.update_player!(socket.assigns.player, player_params) do
+    case Accounts.update_player(socket.assigns.player, player_params) do
       {:ok, player} ->
         notify_parent({:saved, player})
 
+        socket
+        |> put_flash(:info, "Player updated successfully")
+        |> push_patch(to: socket.assigns.patch)
+        |> respond(:noreply)
+
+      {:none} ->
         {:noreply,
          socket
-         |> put_flash(:info, "Player updated successfully")
-         |> push_patch(to: socket.assigns.patch)}
+         |> put_flash(:error, "Player not found")
+         |> push_redirect(to: "/players")}
 
       {:error, %Ecto.Changeset{} = changeset} ->
-        {:noreply, assign_form(socket, changeset)}
+        assign_form(socket, changeset)
+        |> respond(:noreply)
     end
   end
 
@@ -89,6 +96,8 @@ defmodule GameAppWeb.PlayerLive.FormComponent do
         {:noreply, assign_form(socket, changeset)}
     end
   end
+
+  defp respond(socket, response_type), do: {response_type, socket}
 
   defp assign_form(socket, %Ecto.Changeset{} = changeset) do
     assign(socket, :form, to_form(changeset))

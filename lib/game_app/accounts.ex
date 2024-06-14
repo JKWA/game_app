@@ -55,10 +55,41 @@ defmodule GameApp.Accounts do
   - Raises `Ecto.NoResultsError` if no player with the given ID exists.
 
   """
-  @spec get_player!(integer()) :: Player.t() | no_return()
+  @spec get_player!(integer()) :: Player.t()
   def get_player!(id), do: Repo.get!(Player, id)
 
-  def get_player!(id), do: Repo.get!(Player, id)
+  @doc """
+  Fetches a player by ID from the database.
+
+  This function retrieves a player based on the provided ID. It directly queries the Player table in the database. If a player with the specified ID exists, it returns `{:ok, player}`. If no player with such ID exists, it returns `{:none}`.
+
+  ## Parameters
+
+  - `id`: The ID of the player to retrieve. Typically, this is an integer value.
+
+  ## Examples
+
+      # Fetching a player with a valid ID
+      iex> get_player(5)
+      {:ok, %Player{id: 5, name: "Alice", email: "alice@example.com", score: 15}}
+
+      # Attempting to fetch a player with a non-existing ID
+      iex> get_player(9999)
+      {:none}
+
+  ## Returns
+
+  - `{:ok, %Player{}}`: The player record if found.
+  - `{:none}`: If no player with the given ID exists.
+  """
+
+  @spec get_player(integer()) :: {:ok, Player.t()} | {:none}
+  def get_player(id) do
+    case Repo.get(Player, id) do
+      nil -> {:none}
+      player -> {:ok, player}
+    end
+  end
 
   @doc """
   Creates a new player in the database.
@@ -93,42 +124,81 @@ defmodule GameApp.Accounts do
   end
 
   @doc """
-  Updates a player with the given attributes.
+  Updates a player record with the given attributes.
 
-  This function updates a player's attributes and ensures the changes are applied correctly within a database transaction. If any attribute, including `score`, needs to be updated, the function will validate and persist those changes. The function will raise an error if the update fails.
+  This function fetches the player by ID, applies the changes from the provided attributes, and updates the player record in the database. If the player is not found, it raises an `Ecto.NoResultsError`. If the update fails, it raises an `Ecto.InvalidChangesetError`.
 
   ## Parameters
 
-  - `player`: The `%Player{}` struct to be updated.
-  - `attrs`: A map of attributes to update. The `score` in `attrs` should be an integer or string that can be converted to an integer.
+  - `player`: The player struct to update.
+  - `attrs`: A map of attributes to update the player with.
 
   ## Examples
 
-      # When valid attributes are provided
-      iex> update_player!(player, %{"score" => "30", "name" => "John"})
-      %Player{score: 30, name: "John"}
+      # Updating a player with valid attributes
+      iex> update_player!(%Player{id: 5}, %{name: "Alice Updated"})
+      %Player{id: 5, name: "Alice Updated", email: "alice@example.com", score: 15}
 
-      # When invalid attributes are provided
-      iex> update_player!(player, %{"score" => "bad_value"})
-      ** (Ecto.ChangeError) value `"bad_value"` for `Player.score` in `update` does not match type :integer
+      # Attempting to update a non-existing player
+      iex> update_player!(%Player{id: 9999}, %{name: "Non-existing"})
+      ** (Ecto.NoResultsError)
 
   ## Returns
 
-  - `%Player{}`: Successfully updated player.
-  - Raises an error if the update fails.
-
+  - `%Player{}`: The updated player record.
+  - Raises `Ecto.NoResultsError` if the player with the given ID does not exist.
+  - Raises `Ecto.InvalidChangesetError` if the update fails due to validation errors.
   """
-  @spec update_player!(Player.t(), map()) :: Player.t() | no_return()
+
+  @spec update_player!(Player.t(), map()) :: Player.t()
   def update_player!(%Player{} = player, attrs) do
-    Repo.transaction(fn ->
-      current_player = Repo.get!(Player, player.id)
+    current_player = Repo.get!(Player, player.id)
 
-      changeset =
-        current_player
-        |> Player.update_changeset(attrs)
+    current_player
+    |> Player.update_changeset(attrs)
+    |> Repo.update!()
+  end
 
-      Repo.update!(changeset)
-    end)
+  @doc """
+  Updates a player record with the given attributes.
+
+  This function fetches the player by ID, applies the changes from the provided attributes, and attempts to update the player record in the database. If the player is found, it returns `{:ok, updated_player}`. If the player is not found, it returns `{:none}`. If the update fails due to validation errors, it returns `{:error, changeset}`.
+
+  ## Parameters
+
+  - `player`: The player struct to update.
+  - `attrs`: A map of attributes to update the player with.
+
+  ## Examples
+
+      # Updating a player with valid attributes
+      iex> update_player(%Player{id: 5}, %{name: "Alice Updated"})
+      {:ok, %Player{id: 5, name: "Alice Updated", email: "alice@example.com", score: 15}}
+
+      # Attempting to update a non-existing player
+      iex> update_player(%Player{id: 9999}, %{name: "Non-existing"})
+      {:none}
+
+      # Attempting to update a player with invalid attributes
+      iex> update_player(%Player{id: 5}, %{email: "invalid-email"})
+      {:error, %Ecto.Changeset{}}
+
+  ## Returns
+
+  - `{:ok, %Player{}}`: The updated player record if the update is successful.
+  - `{:none}`: If the player with the given ID does not exist.
+  - `{:error, %Ecto.Changeset{}}`: If the update fails due to validation errors.
+  """
+  @spec update_player(Player.t(), map()) ::
+          {:ok, Player.t()} | {:error, Ecto.Changeset.t()} | {:none}
+  def update_player(%Player{} = player, attrs) do
+    with {:ok, current_player} <- get_player(player.id),
+         changeset = Player.update_changeset(current_player, attrs),
+         result <- Repo.update(changeset) do
+      result
+    else
+      {:none} -> {:none}
+    end
   end
 
   @doc """
