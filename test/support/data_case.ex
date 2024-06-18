@@ -24,6 +24,7 @@ defmodule GameApp.DataCase do
       import Ecto.Changeset
       import Ecto.Query
       import GameApp.DataCase
+      import GameApp.Factory
     end
   end
 
@@ -53,6 +54,13 @@ defmodule GameApp.DataCase do
       Regex.replace(~r"%{(\w+)}", message, fn _, key ->
         opts |> Keyword.get(String.to_existing_atom(key), key) |> to_string()
       end)
+    end)
+  end
+
+  def assert_fields_match(actual, expected, fields) do
+    Enum.each(fields, fn field ->
+      assert Map.get(actual, field) == Map.get(expected, field),
+             "#{field} does not match. Expected: #{inspect(Map.get(expected, field))}, got: #{inspect(Map.get(actual, field))}"
     end)
   end
 end

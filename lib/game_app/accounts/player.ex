@@ -1,6 +1,7 @@
 defmodule GameApp.Accounts.Player do
   use Ecto.Schema
   import Ecto.Changeset
+  @default_score 0
 
   @moduledoc """
   Provides the schema and changesets for player accounts within the `GameApp`.
@@ -30,7 +31,7 @@ defmodule GameApp.Accounts.Player do
   schema "players" do
     field :name, :string
     field :email, :string
-    field :score, :integer, default: 0
+    field :score, :integer, default: @default_score
 
     timestamps()
   end
@@ -115,5 +116,19 @@ defmodule GameApp.Accounts.Player do
     else
       changeset
     end
+  end
+
+  @doc """
+  Returns the default score value for a player.
+
+  ## Examples
+
+      iex> GameApp.Accounts.Player.default_score()
+      0
+
+  """
+  @spec default_score() :: integer
+  def default_score do
+    @default_score
   end
 end

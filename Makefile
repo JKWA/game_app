@@ -39,3 +39,19 @@ reset.dev:
 	MIX_ENV=dev mix ecto.create
 	@echo "Migrating database for development environment..."
 	MIX_ENV=dev mix ecto.migrate
+
+setup.test:
+	@echo "Getting deps for test environment..."
+	MIX_ENV=test mix deps.get
+	@echo "Creating database for testing environment..."
+	MIX_ENV=test mix ecto.create
+	@echo "Running migrations for testing environment..."
+	MIX_ENV=test mix ecto.migrate
+
+reset.test:
+	@echo "Resetting database for testing environment..."
+	MIX_ENV=test mix ecto.drop
+	@echo "Recreating database for testing environment..."
+	MIX_ENV=test mix ecto.create
+	@echo "Migrating database for testing environment..."
+	MIX_ENV=test mix ecto.migrate

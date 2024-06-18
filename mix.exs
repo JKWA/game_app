@@ -39,7 +39,6 @@ defmodule GameApp.MixProject do
       {:phoenix_html, "~> 3.3"},
       {:phoenix_live_reload, "~> 1.2", only: :dev},
       {:phoenix_live_view, "~> 0.19.0"},
-      {:floki, ">= 0.30.0", only: :test},
       {:phoenix_live_dashboard, "~> 0.8.0"},
       {:esbuild, "~> 0.7", runtime: Mix.env() == :dev},
       {:tailwind, "~> 0.2.0", runtime: Mix.env() == :dev},
@@ -53,7 +52,12 @@ defmodule GameApp.MixProject do
       {:ex_doc, "~> 0.34", only: [:dev, :docs], runtime: false},
       {:earmark, "~> 1.4", only: [:dev, :docs], runtime: false},
       {:makeup_elixir, "~> 0.16", only: [:dev, :docs], runtime: false},
-      {:dialyxir, "~> 1.4", only: :dev, runtime: false}
+      {:dialyxir, "~> 1.4", only: :dev, runtime: false},
+      {:floki, ">= 0.30.0", only: :test},
+      {:bypass, "~> 2.1", only: [:dev, :test]},
+      {:faker, "~> 0.17", only: [:dev, :test]},
+      {:ex_machina, "~> 2.7", only: :test},
+      {:mox, "~> 1.1.0", only: :test}
     ]
   end
 

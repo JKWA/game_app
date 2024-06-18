@@ -2,62 +2,105 @@ defmodule GameApp.AccountsTest do
   use GameApp.DataCase
 
   alias GameApp.Accounts
+  alias GameApp.Accounts.Player
 
-  describe "players" do
-    alias GameApp.Accounts.Player
+  @moduletag :accounts
+  @moduletag :player
+  @moduletag :database
 
-    import GameApp.AccountsFixtures
+  setup do
+    player = insert(:player)
+    {:ok, player: player}
+  end
 
-    @invalid_attrs %{name: nil, email: nil, score: nil}
-
-    test "list_players/0 returns all players" do
-      player = player_fixture()
+  describe "list_players/0" do
+    test "lists all players", %{player: player} do
       assert Accounts.list_players() == [player]
     end
+  end
 
-    test "get_player!/1 returns the player with given id" do
-      player = player_fixture()
-      assert Accounts.get_player!(player.id) == player
+  describe "get_player/1" do
+    test "retrieves a player by id", %{player: player} do
+      assert {:ok, retrieved_player} = Accounts.get_player(player.id)
+      assert_player_attributes(player, retrieved_player)
     end
 
-    test "create_player/1 with valid data creates a player" do
-      valid_attrs = %{name: "some name", email: "some email", score: 42}
+    test "returns :none when player does not exist" do
+      assert {:none} = Accounts.get_player(-1)
+    end
+  end
 
-      assert {:ok, %Player{} = player} = Accounts.create_player(valid_attrs)
-      assert player.name == "some name"
-      assert player.email == "some email"
-      assert player.score == 42
+  describe "create_player/1" do
+    setup do
+      attrs = %{
+        name: Faker.Person.name(),
+        email: Faker.Internet.email(),
+        score: Faker.random_between(1, 100_000)
+      }
+
+      {:ok, attrs: attrs}
     end
 
-    test "create_player/1 with invalid data returns error changeset" do
-      assert {:error, %Ecto.Changeset{}} = Accounts.create_player(@invalid_attrs)
+    test "creates a new player", %{attrs: attrs} do
+      assert {:ok, new_player} = Accounts.create_player(attrs)
+      assert_player_attributes(attrs, new_player)
     end
 
-    test "update_player/2 with valid data updates the player" do
-      player = player_fixture()
-      update_attrs = %{name: "some updated name", email: "some updated email", score: 43}
-
-      assert {:ok, %Player{} = player} = Accounts.update_player(player, update_attrs)
-      assert player.name == "some updated name"
-      assert player.email == "some updated email"
-      assert player.score == 43
+    test "creates a player with default score when score is not provided", %{attrs: attrs} do
+      attrs = Map.delete(attrs, :score)
+      assert {:ok, new_player} = Accounts.create_player(attrs)
+      default_score = Player.default_score()
+      assert new_player.score == default_score
     end
 
-    test "update_player/2 with invalid data returns error changeset" do
-      player = player_fixture()
-      assert {:error, %Ecto.Changeset{}} = Accounts.update_player(player, @invalid_attrs)
-      assert player == Accounts.get_player!(player.id)
+    test "fails to create a player with negative score", %{attrs: attrs} do
+      attrs = Map.put(attrs, :score, -1)
+      assert {:error, _} = Accounts.create_player(attrs)
     end
 
-    test "delete_player/1 deletes the player" do
-      player = player_fixture()
-      assert {:ok, %Player{}} = Accounts.delete_player(player)
-      assert_raise Ecto.NoResultsError, fn -> Accounts.get_player!(player.id) end
+    test "fails to create a player with invalid email", %{attrs: attrs} do
+      attrs = Map.put(attrs, :email, "invalid")
+      assert {:error, _} = Accounts.create_player(attrs)
     end
 
-    test "change_player/1 returns a player changeset" do
-      player = player_fixture()
-      assert %Ecto.Changeset{} = Accounts.change_player(player)
+    test "fails to create a player with an existing email", %{player: player, attrs: attrs} do
+      attrs = Map.put(attrs, :email, player.email)
+      assert {:error, _} = Accounts.create_player(attrs)
     end
+  end
+
+  describe "update_player/2" do
+    test "updates a player successfully", %{player: player} do
+      update_attrs = %{name: Faker.Person.name(), score: player.score + 1}
+      assert {:ok, updated_player} = Accounts.update_player(player, update_attrs)
+      assert updated_player.name == update_attrs.name
+      assert updated_player.score == update_attrs.score
+    end
+
+    test "fails to decrement player score", %{player: player} do
+      update_attrs = %{score: player.score - 1}
+      assert {:error, _} = Accounts.update_player(player, update_attrs)
+    end
+
+    test "does not change email on update", %{player: player} do
+      update_attrs = %{email: Faker.Internet.email()}
+      assert {:ok, updated_player} = Accounts.update_player(player, update_attrs)
+      refute updated_player.email == update_attrs.email
+    end
+  end
+
+  describe "delete_player/1" do
+    test "deletes a player", %{player: player} do
+      id = player.id
+      assert {:ok, _} = Accounts.get_player(id)
+      assert {:ok, _} = Accounts.delete_player(player)
+      assert {:none} = Accounts.get_player(id)
+    end
+  end
+
+  defp assert_player_attributes(expected, actual) do
+    assert actual.name == expected.name
+    assert actual.email == expected.email
+    assert actual.score == expected.score
   end
 end
