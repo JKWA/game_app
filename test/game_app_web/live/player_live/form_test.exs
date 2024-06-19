@@ -3,6 +3,10 @@ defmodule GameAppWeb.PlayerLiveFormTest do
 
   import Phoenix.LiveViewTest
 
+  @moduletag :player
+  @moduletag :database
+  @moduletag :live_view
+
   @valid_attrs %{
     name: Faker.Person.name(),
     email: Faker.Internet.email(),

@@ -3,6 +3,8 @@ defmodule GameAppWeb.PlayerLiveIndexTest do
 
   import Phoenix.LiveViewTest
   @moduletag :player
+  @moduletag :database
+  @moduletag :live_view
 
   @url "/players"
 

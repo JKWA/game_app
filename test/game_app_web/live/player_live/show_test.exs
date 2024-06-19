@@ -3,6 +3,10 @@ defmodule GameAppWeb.PlayerLiveShowTest do
 
   import Phoenix.LiveViewTest
 
+  @moduletag :player
+  @moduletag :database
+  @moduletag :live_view
+
   def get_url(player) do
     ~p"/players/#{player.id}"
   end
