@@ -1,4 +1,7 @@
 defmodule GameApp.Factory do
+  @moduledoc """
+  Module for defining factories for generating test data.
+  """
   use ExMachina.Ecto, repo: GameApp.Repo
 
   alias GameApp.Accounts.Player

@@ -1,4 +1,8 @@
 defmodule GameAppWeb.HTMLSelectors do
+  @moduledoc """
+  Module for defining CSS selectors and helper functions for checking HTML elements in LiveView tests.
+  """
+
   import Phoenix.LiveViewTest
 
   @doc """

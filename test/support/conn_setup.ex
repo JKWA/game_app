@@ -1,4 +1,7 @@
 defmodule GameAppWeb.ConnSetup do
+  @moduledoc """
+  Module for setting up test connections.
+  """
   import GameApp.Factory
 
   def create_player_1(context) do

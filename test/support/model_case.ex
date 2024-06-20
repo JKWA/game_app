@@ -4,6 +4,7 @@ defmodule GameApp.ModelCase do
 
   This module includes helper functions to facilitate the creation of valid and invalid parameters based on schema definitions, assertion of changeset properties, and more comprehensive schema checks.
   """
+  alias Ecto.Adapters.SQL.Sandbox
 
   use ExUnit.CaseTemplate
 
@@ -15,7 +16,7 @@ defmodule GameApp.ModelCase do
   end
 
   setup _ do
-    Ecto.Adapters.SQL.Sandbox.mode(GameApp.Repo, :manual)
+    Sandbox.mode(GameApp.Repo, :manual)
   end
 
   @doc """
