@@ -1,4 +1,7 @@
 defmodule GameAppWeb.PlayerLive.Index do
+  @moduledoc """
+  LiveView module for listing players.
+  """
   use GameAppWeb, :live_view
 
   alias GameApp.Accounts

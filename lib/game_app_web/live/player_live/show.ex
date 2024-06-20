@@ -1,6 +1,6 @@
 defmodule GameAppWeb.PlayerLive.Show do
   @moduledoc """
-  LiveView module for displaying and player details.
+  LiveView module for displaying player details.
   """
 
   use GameAppWeb, :live_view
