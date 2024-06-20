@@ -10,6 +10,13 @@ docs:
 	@echo "Generating documentation..."
 	MIX_ENV=dev mix docs
 
+lint:
+	@echo "Linting code..."
+	@echo "Running Dializer..."
+	MIX_ENV=dev mix dialyzer
+	@echo "Running Credo..."
+	MIX_ENV=dev mix credo --strict
+
 setup.dev:
 	@echo "Getting deps for development environment..."
 	MIX_ENV=dev mix deps.get
@@ -19,10 +26,6 @@ setup.dev:
 	MIX_ENV=dev mix ecto.migrate
 	@echo "Adding dialyzer..."
 	MIX_ENV=dev mix dialyzer --plt
-
-analyze.dev:
-	@echo "Analyzing code for development environment..."
-	MIX_ENV=dev mix dialyzer
 
 migrate.dev:
 	@echo "Running migrations for development environment..."

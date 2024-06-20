@@ -57,7 +57,8 @@ defmodule GameApp.MixProject do
       {:bypass, "~> 2.1", only: [:dev, :test]},
       {:faker, "~> 0.17", only: [:dev, :test]},
       {:ex_machina, "~> 2.7", only: :test},
-      {:mox, "~> 1.1.0", only: :test}
+      {:mox, "~> 1.1.0", only: :test},
+      {:credo, "~> 1.6", only: [:dev, :test], runtime: false}
     ]
   end
 
