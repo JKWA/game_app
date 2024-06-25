@@ -1,4 +1,7 @@
 defmodule GameAppWeb.PlayerLiveFormTest do
+  @moduledoc """
+  Tests for the `GameAppWeb.PlayerLive.Form` module.
+  """
   use GameAppWeb.ConnCase
 
   import Phoenix.LiveViewTest
@@ -10,7 +13,7 @@ defmodule GameAppWeb.PlayerLiveFormTest do
   @valid_attrs %{
     name: Faker.Person.name(),
     email: Faker.Internet.email(),
-    score: Faker.random_between(1, 100_000)
+    score: Faker.random_between(0, 100_000)
   }
   @invalid_attrs %{name: nil, email: "INVAID_EMAIL", score: -1}
   @url "/players/new"
