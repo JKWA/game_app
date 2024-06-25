@@ -58,9 +58,11 @@ defmodule GameAppWeb.PlayerLive.Index do
   end
 
   @doc """
+  Handles incoming messages for updating player information in the LiveView.
 
-  ### `handle_info/2` Function Documentation
+  This function has three clauses:
 
+  ### Handling `:saved` Message
   #### Overview
   Handles the `:saved` message from the `PlayerLive.FormComponent`, broadcasting an update and maintaining the socket state.
 
@@ -72,14 +74,7 @@ defmodule GameAppWeb.PlayerLive.Index do
   - **Broadcast Update**: Sends a broadcast about the updated player using the `broadcast_update/2` function, notifying other parts of the application about the change.
   - **Socket Maintenance**: No changes are made to the socket, and it simply passes through to maintain the current state.
 
-  """
-  @impl true
-  def handle_info({GameAppWeb.PlayerLive.FormComponent, {:saved, player}}, socket) do
-    broadcast_update(:update_player, player)
-    {:noreply, socket}
-  end
-
-  @doc """
+  ### Processing Player Updates
   #### Overview
   Processes updates for players, either adding new ones or updating existing ones, unless the player is marked as deleted.
 
@@ -90,46 +85,12 @@ defmodule GameAppWeb.PlayerLive.Index do
   #### Functionality
   1. **Check Deletion Status**: Skips updates if the player ID is found in the `deleted_player_ids` set.
   2. **Player Update Handling**:
-   - **New Player**: Adds the player to the `players` map and updates the client view if the player does not exist.
-   - **Existing Player**: Updates the player data using `get_latest/2` if the player already exists, ensuring only the most recent data is used.
-
+    - **New Player**: Adds the player to the `players` map and updates the client view if the player does not exist.
+    - **Existing Player**: Updates the player data using `get_latest/2` if the player already exists, ensuring only the most recent data is used.
   3. **Stream Updates**:
-   - Uses `stream_insert` to send real-time updates to the client, reflecting changes in the player list.
-  """
-  @impl true
-  def handle_info({:update_player, new_player}, socket) do
-    players = socket.assigns.players
-    deleted_player_ids = socket.assigns.deleted_player_ids
+    - Uses `stream_insert` to send real-time updates to the client, reflecting changes in the player list.
 
-    if MapSet.member?(deleted_player_ids, new_player.id) do
-      {:noreply, socket}
-    else
-      case Map.get(players, new_player.id) do
-        nil ->
-          updated_players = Map.put(players, new_player.id, new_player)
-
-          new_socket =
-            socket
-            |> assign(:players, updated_players)
-            |> stream_insert(:players, new_player)
-
-          {:noreply, new_socket}
-
-        existing_player ->
-          updated_player = get_latest(existing_player, new_player)
-          updated_players = Map.put(players, new_player.id, updated_player)
-
-          new_socket =
-            socket
-            |> assign(:players, updated_players)
-            |> stream_insert(:players, updated_player)
-
-          {:noreply, new_socket}
-      end
-    end
-  end
-
-  @doc """
+  ### Handling Player Deletion
   #### Overview
   Handles the deletion of a player by updating the application's state and client view accordingly.
 
@@ -141,10 +102,48 @@ defmodule GameAppWeb.PlayerLive.Index do
   1. **Remove Player**: Deletes the player from the `players` map using the player's ID.
   2. **Track Deletion**: Adds the player's ID to the `deleted_player_ids` set to prevent future operations on this player.
   3. **Update Client View**:
-   - Assigns the updated players map and deletion set back to the socket.
-   - Initiates a `stream_delete` to remove the player from the client's display in real-time.
-
+    - Assigns the updated players map and deletion set back to the socket.
+    - Initiates a `stream_delete` to remove the player from the client's display in real-time.
   """
+  @impl true
+  def handle_info({GameAppWeb.PlayerLive.FormComponent, {:saved, player}}, socket) do
+    broadcast_update(:update_player, player)
+    {:noreply, socket}
+  end
+
+  @impl true
+  def handle_info({:update_player, incoming_player}, socket) do
+    players = socket.assigns.players
+    deleted_player_ids = socket.assigns.deleted_player_ids
+
+    if MapSet.member?(deleted_player_ids, incoming_player.id) do
+      {:noreply, socket}
+    else
+      case Map.get(players, incoming_player.id) do
+        nil ->
+          updated_players = Map.put(players, incoming_player.id, incoming_player)
+
+          new_socket =
+            socket
+            |> assign(:players, updated_players)
+            |> stream_insert(:players, incoming_player)
+
+          {:noreply, new_socket}
+
+        existing_player ->
+          updated_player = get_latest(existing_player, incoming_player)
+          updated_players = Map.put(players, incoming_player.id, incoming_player)
+
+          new_socket =
+            socket
+            |> assign(:players, updated_players)
+            |> stream_insert(:players, updated_player)
+
+          {:noreply, new_socket}
+      end
+    end
+  end
+
   @impl true
   def handle_info({:delete_player, player}, socket) do
     updated_players = Map.delete(socket.assigns.players, player.id)
