@@ -152,7 +152,7 @@ Pages
 
       </div>
 
-        <div class="summary-synopsis"><h4>Overview</h4><p>Handles the deletion of a player by updating the application's state and client view accordingly.</p></div>
+        <div class="summary-synopsis"><p>Handles incoming messages for updating player information in the LiveView.</p></div>
 
     </div>
 
@@ -230,6 +230,24 @@ Pages
 
   <section class="docstring">
 
+<p>Handles incoming messages for updating player information in the LiveView.</p><p>This function has three clauses:</p><h3 id="handle_info/2-handling-saved-message" class="section-heading">
+  <a href="#handle_info/2-handling-saved-message" class="hover-link">
+    <i class="ri-link-m" aria-hidden="true"></i>
+  </a>
+  <span class="text">Handling <code class="inline">:saved</code> Message</span>
+</h3>
+<h4>Overview</h4><p>Handles the <code class="inline">:saved</code> message from the <code class="inline">PlayerLive.FormComponent</code>, broadcasting an update and maintaining the socket state.</p><h4>Parameters</h4><ul><li><code class="inline">{GameAppWeb.PlayerLive.FormComponent, {:saved, player}}</code>: Tuple indicating the source of the message and the action, along with the player data.</li><li><code class="inline">socket</code>: Current LiveView socket.</li></ul><h4>Functionality</h4><ul><li><strong>Broadcast Update</strong>: Sends a broadcast about the updated player using the <code class="inline">broadcast_update/2</code> function, notifying other parts of the application about the change.</li><li><strong>Socket Maintenance</strong>: No changes are made to the socket, and it simply passes through to maintain the current state.</li></ul><h3 id="handle_info/2-processing-player-updates" class="section-heading">
+  <a href="#handle_info/2-processing-player-updates" class="hover-link">
+    <i class="ri-link-m" aria-hidden="true"></i>
+  </a>
+  <span class="text">Processing Player Updates</span>
+</h3>
+<h4>Overview</h4><p>Processes updates for players, either adding new ones or updating existing ones, unless the player is marked as deleted.</p><h4>Parameters</h4><ul><li><code class="inline">{:update_player, new_player}</code>: Tuple containing the action and the player data.</li><li><code class="inline">socket</code>: Current LiveView socket.</li></ul><h4>Functionality</h4><ol><li><strong>Check Deletion Status</strong>: Skips updates if the player ID is found in the <code class="inline">deleted_player_ids</code> set.</li><li><strong>Player Update Handling</strong>:</li></ol><ul><li><strong>New Player</strong>: Adds the player to the <code class="inline">players</code> map and updates the client view if the player does not exist.</li><li><strong>Existing Player</strong>: Updates the player data using <code class="inline">get_latest/2</code> if the player already exists, ensuring only the most recent data is used.</li></ul><ol start="3"><li><strong>Stream Updates</strong>:</li></ol><ul><li>Uses <code class="inline">stream_insert</code> to send real-time updates to the client, reflecting changes in the player list.</li></ul><h3 id="handle_info/2-handling-player-deletion" class="section-heading">
+  <a href="#handle_info/2-handling-player-deletion" class="hover-link">
+    <i class="ri-link-m" aria-hidden="true"></i>
+  </a>
+  <span class="text">Handling Player Deletion</span>
+</h3>
 <h4>Overview</h4><p>Handles the deletion of a player by updating the application's state and client view accordingly.</p><h4>Parameters</h4><ul><li><code class="inline">{:delete_player, player}</code>: Tuple indicating the action and the player to be deleted.</li><li><code class="inline">socket</code>: Current LiveView socket.</li></ul><h4>Functionality</h4><ol><li><strong>Remove Player</strong>: Deletes the player from the <code class="inline">players</code> map using the player's ID.</li><li><strong>Track Deletion</strong>: Adds the player's ID to the <code class="inline">deleted_player_ids</code> set to prevent future operations on this player.</li><li><strong>Update Client View</strong>:</li></ol><ul><li>Assigns the updated players map and deletion set back to the socket.</li><li>Initiates a <code class="inline">stream_delete</code> to remove the player from the client's display in real-time.</li></ul>
   </section>
 </section>
