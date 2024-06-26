@@ -40,4 +40,7 @@ quiz-*.tar
 npm-debug.log
 /assets/node_modules/
 
+/text-external-service/venv/
+/text-external-service/__pycache__/
+
 dev.secret.exs

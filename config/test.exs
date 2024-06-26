@@ -27,3 +27,6 @@ config :logger, level: :warning
 
 # Initialize plugs at runtime for faster test compilation
 config :phoenix, :plug_init_mode, :runtime
+
+# Configure the text extract service to use the mock service
+config :game_app, text_extract_service: GameApp.External.TextExtractMockService

@@ -58,7 +58,9 @@ defmodule GameApp.MixProject do
       {:faker, "~> 0.17", only: [:dev, :test]},
       {:ex_machina, "~> 2.7", only: :test},
       {:mox, "~> 1.1.0", only: :test},
-      {:credo, "~> 1.6", only: [:dev, :test], runtime: false}
+      {:credo, "~> 1.6", only: [:dev, :test], runtime: false},
+      {:httpoison, "~> 2.2.1"},
+      {:hackney, "~> 1.20.1"}
     ]
   end
 

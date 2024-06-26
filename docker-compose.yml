@@ -19,3 +19,18 @@ services:
       ports:
         - "5482:5432" 
 
+  get_text_dev_service:
+    build:
+      context: ./text-external-service
+    ports:
+      - "8201:8000"
+    volumes:
+      - ./text-external-service:/app
+
+  get_text_prod_service:
+    build:
+      context: ./text-external-service
+    ports:
+      - "8202:8000"
+    volumes:
+      - ./text-external-service:/app
