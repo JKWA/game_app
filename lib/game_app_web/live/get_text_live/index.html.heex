@@ -1,0 +1,18 @@
+<div>
+    <.header>
+      Get Text from URL
+      <:subtitle>Enter a URL below to fetch text from a document.</:subtitle>
+    </.header>
+
+    <.simple_form for={@form} id="get_text_form" phx-submit="submit" phx-change="validate">
+        <.input field={@form[:url]} type="text" label="URL" />
+        <.button phx-disable-with="Getting text...">Submit URL</.button>
+    </.simple_form>
+    <%= if String.length(@result) > 0 do %>
+        <.button phx-click="clear_result">Clear Result</.button>
+        <div id="result">
+            <%= @result %>
+        </div>
+    <% end %>
+   
+</div>
