@@ -1,6 +1,10 @@
 404.html
 GameApp.Accounts.Player.html
 GameApp.Accounts.html
+GameApp.External.TextExtractBehaviour.html
+GameApp.External.TextExtractDevService.html
+GameApp.External.TextExtractProdService.html
+GameApp.External.TextExtractService.html
 GameApp.Mailer.html
 GameApp.Repo.html
 GameApp.html
@@ -36,7 +40,7 @@ dist/lato-latin-ext-300-normal-VPGGJKJL.woff2
 dist/lato-latin-ext-400-normal-N27NCBWW.woff2
 dist/lato-latin-ext-700-normal-Q2L5DVMW.woff2
 dist/remixicon-NKANDIL5.woff2
-dist/search_data-07A6DD70.js
-dist/sidebar_items-15F17CCA.js
+dist/search_data-81246E91.js
+dist/sidebar_items-D414A8A9.js
 index.html
 search.html
