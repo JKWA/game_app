@@ -27,7 +27,8 @@ defmodule GameAppWeb.Router do
     live "/players/:id/show/edit", PlayerLive.Show, :edit
 
     live "/get-text", GetTextLive.Index, :index
-    live "/get-text/new", GetTextLive.FormComponent, :new
+
+    live "/increment", IncrementLive.Index, :index
   end
 
   # Other scopes may use custom stacks.

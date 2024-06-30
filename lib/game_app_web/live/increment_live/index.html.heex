@@ -1,0 +1,19 @@
+<div>
+    <.header>
+      Increment
+      <:actions>
+        <.button phx-disable-with="Blocking..." phx-click="increment_click">
+          Sync
+        </.button>
+        <.button phx-disable-with="Blocking..." phx-click="async_increment_click">
+          Async
+        </.button>
+        <.button phx-disable-with="Blocking..." phx-click="real_async_increment_click">
+          Real Async
+        </.button>
+      </:actions>
+    </.header>
+    <div>
+      <%= @increment_value %>
+    </div>
+</div>
