@@ -8,7 +8,7 @@
     <meta name="project" content="game_app v0.1.0">
 
 
-    <title>GameApp.External.TextExtractDevService — game_app v0.1.0</title>
+    <title>GameApp.Workers.IncrementWorker — game_app v0.1.0</title>
     <link rel="stylesheet" href="dist/html-elixir-K5ICTFVY.css" />
 
 
@@ -112,14 +112,14 @@ Pages
 <div id="top-content">
   <h1>
 
-    <span translate="no">GameApp.External.TextExtractDevService</span> 
+    <span translate="no">GameApp.Workers.IncrementWorker</span> 
     <small class="app-vsn" translate="no">(game_app v0.1.0)</small>
 
   </h1>
 
 
     <section id="moduledoc">
-<p>Implements <a href="GameApp.External.TextExtractBehaviour.html"><code class="inline">GameApp.External.TextExtractBehaviour</code></a> for handling text extraction</p>
+<p>This module provides functions to increment an integer synchronously and asynchronously.</p>
     </section>
 
 </div>
@@ -138,11 +138,21 @@ Pages
 
     <div class="summary-row">
       <div class="summary-signature">
-        <a href="#extract_text/1" data-no-tooltip translate="no">extract_text(url)</a>
+        <a href="#async/1" data-no-tooltip translate="no">async(integer)</a>
 
       </div>
 
-        <div class="summary-synopsis"><p>Extract text from a file by sending it to the external FastAPI service.</p></div>
+        <div class="summary-synopsis"><p>Asynchronously increments the given integer by one after a delay.</p></div>
+
+    </div>
+
+    <div class="summary-row">
+      <div class="summary-signature">
+        <a href="#sync/1" data-no-tooltip translate="no">sync(integer)</a>
+
+      </div>
+
+        <div class="summary-synopsis"><p>Increases the given integer by one.</p></div>
 
     </div>
 
@@ -159,21 +169,91 @@ Pages
       <span class="text">Functions</span>
     </h1>
     <div class="functions-list">
-<section class="detail" id="extract_text/1">
+<section class="detail" id="async/1">
 
   <div class="detail-header">
-    <a href="#extract_text/1" class="detail-link" data-no-tooltip title="Link to this function">
+    <a href="#async/1" class="detail-link" data-no-tooltip title="Link to this function">
       <i class="ri-link-m" aria-hidden="true"></i>
       <span class="sr-only">Link to this function</span>
     </a>
-    <h1 class="signature" translate="no">extract_text(url)</h1>
+    <h1 class="signature" translate="no">async(integer)</h1>
 
 
   </div>
 
   <section class="docstring">
 
-<p>Extract text from a file by sending it to the external FastAPI service.</p>
+      <div class="specs">
+
+          <pre translate="no"><span class="attribute">@spec</span> async(integer :: <a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">integer</a>()) :: <a href="https://hexdocs.pm/elixir/Task.html#t:t/0">Task.t</a>()</pre>
+
+      </div>
+
+<p>Asynchronously increments the given integer by one after a delay.</p><p>This function starts a new asynchronous task that will wait for 3 seconds
+before calling the <code class="inline">sync</code> function to increment the provided integer.</p><h2 id="async/1-parameters" class="section-heading">
+  <a href="#async/1-parameters" class="hover-link">
+    <i class="ri-link-m" aria-hidden="true"></i>
+  </a>
+  <span class="text">Parameters</span>
+</h2>
+<ul><li><code class="inline">integer</code>: an integer value to be incremented asynchronously.</li></ul><h2 id="async/1-returns" class="section-heading">
+  <a href="#async/1-returns" class="hover-link">
+    <i class="ri-link-m" aria-hidden="true"></i>
+  </a>
+  <span class="text">Returns</span>
+</h2>
+<p>Returns a <a href="https://hexdocs.pm/elixir/Task.html"><code class="inline">Task</code></a> struct representing the asynchronous operation.</p><h2 id="async/1-example" class="section-heading">
+  <a href="#async/1-example" class="hover-link">
+    <i class="ri-link-m" aria-hidden="true"></i>
+  </a>
+  <span class="text">Example</span>
+</h2>
+<pre><code class="makeup elixir" translate="no"><span class="gp unselectable">iex&gt; </span><span class="n">task</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">GameApp.Workers.IncrementWorker</span><span class="o">.</span><span class="n">async</span><span class="p" data-group-id="9582103972-1">(</span><span class="mi">5</span><span class="p" data-group-id="9582103972-1">)</span><span class="w">
+</span><span class="p" data-group-id="9582103972-2">#</span><span class="nc" data-group-id="9582103972-2">Task</span><span class="p" data-group-id="9582103972-2">&lt;</span><span class="n">...</span><span class="p" data-group-id="9582103972-2">&gt;</span><span class="w">
+</span><span class="gp unselectable">iex&gt; </span><span class="nc">Task</span><span class="o">.</span><span class="n">await</span><span class="p" data-group-id="9582103972-3">(</span><span class="n">task</span><span class="p" data-group-id="9582103972-3">)</span><span class="w">
+</span><span class="mi">6</span></code></pre>
+  </section>
+</section>
+<section class="detail" id="sync/1">
+
+  <div class="detail-header">
+    <a href="#sync/1" class="detail-link" data-no-tooltip title="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature" translate="no">sync(integer)</h1>
+
+
+  </div>
+
+  <section class="docstring">
+
+      <div class="specs">
+
+          <pre translate="no"><span class="attribute">@spec</span> sync(integer :: <a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">integer</a>()) :: <a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">integer</a>()</pre>
+
+      </div>
+
+<p>Increases the given integer by one.</p><h2 id="sync/1-parameters" class="section-heading">
+  <a href="#sync/1-parameters" class="hover-link">
+    <i class="ri-link-m" aria-hidden="true"></i>
+  </a>
+  <span class="text">Parameters</span>
+</h2>
+<ul><li><code class="inline">integer</code>: an integer value to be incremented.</li></ul><h2 id="sync/1-returns" class="section-heading">
+  <a href="#sync/1-returns" class="hover-link">
+    <i class="ri-link-m" aria-hidden="true"></i>
+  </a>
+  <span class="text">Returns</span>
+</h2>
+<p>Returns the incremented integer.</p><h2 id="sync/1-example" class="section-heading">
+  <a href="#sync/1-example" class="hover-link">
+    <i class="ri-link-m" aria-hidden="true"></i>
+  </a>
+  <span class="text">Example</span>
+</h2>
+<pre><code class="makeup elixir" translate="no"><span class="gp unselectable">iex&gt; </span><span class="nc">GameApp.Workers.IncrementWorker</span><span class="o">.</span><span class="n">sync</span><span class="p" data-group-id="7276273166-1">(</span><span class="mi">5</span><span class="p" data-group-id="7276273166-1">)</span><span class="w">
+</span><span class="mi">6</span></code></pre>
   </section>
 </section>
 
