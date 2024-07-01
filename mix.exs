@@ -60,7 +60,8 @@ defmodule GameApp.MixProject do
       {:mox, "~> 1.1.0", only: :test},
       {:credo, "~> 1.6", only: [:dev, :test], runtime: false},
       {:httpoison, "~> 2.2.1"},
-      {:hackney, "~> 1.20.1"}
+      {:hackney, "~> 1.20.1"},
+      {:oban, "~> 2.17"}
     ]
   end
 

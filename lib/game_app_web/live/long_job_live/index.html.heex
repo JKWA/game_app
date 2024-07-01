@@ -1,0 +1,15 @@
+<div>
+    <.header>
+      Jobs
+      <:subtitle>Run multiple async long running jobs.</:subtitle>
+
+      <:actions>
+        <.button phx-click="trigger_job">Start Job</.button>
+      </:actions>
+    </.header>
+    <.list>
+      <:item :for={result <- @job_results} title="Result">
+        <%= result %>
+      </:item>
+    </.list>
+  </div>

@@ -12,6 +12,8 @@ defmodule GameApp.Application do
       GameAppWeb.Telemetry,
       # Start the Ecto repository
       GameApp.Repo,
+      # Start the Oban supervisor
+      {Oban, Application.fetch_env!(:game_app, Oban)},
       # Start the PubSub system
       {Phoenix.PubSub, name: GameApp.PubSub},
       # Start Finch

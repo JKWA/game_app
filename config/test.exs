@@ -30,3 +30,6 @@ config :phoenix, :plug_init_mode, :runtime
 
 # Configure the text extract service to use the mock service
 config :game_app, text_extract_service: GameApp.External.TextExtractMockService
+
+# In test don't run Oban.
+config :game_app, Oban, testing: :inline
