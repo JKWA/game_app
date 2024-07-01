@@ -9,6 +9,7 @@ GameApp.Mailer.html
 GameApp.Repo.html
 GameApp.Websites.GetText.html
 GameApp.Workers.IncrementWorker.html
+GameApp.Workers.LongJobWorker.html
 GameApp.html
 GameAppWeb.CoreComponents.html
 GameAppWeb.Endpoint.html
@@ -18,6 +19,7 @@ GameAppWeb.GetTextLive.Index.html
 GameAppWeb.Gettext.html
 GameAppWeb.IncrementLive.Index.html
 GameAppWeb.Layouts.html
+GameAppWeb.LongJobLive.Index.html
 GameAppWeb.PageController.html
 GameAppWeb.PageHTML.html
 GameAppWeb.PlayerLive.FormComponent.html
@@ -44,7 +46,7 @@ dist/lato-latin-ext-300-normal-VPGGJKJL.woff2
 dist/lato-latin-ext-400-normal-N27NCBWW.woff2
 dist/lato-latin-ext-700-normal-Q2L5DVMW.woff2
 dist/remixicon-NKANDIL5.woff2
-dist/search_data-DBE5B4A6.js
-dist/sidebar_items-FD25FAAD.js
+dist/search_data-83423DF9.js
+dist/sidebar_items-E335E402.js
 index.html
 search.html

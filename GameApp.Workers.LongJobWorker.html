@@ -8,7 +8,7 @@
     <meta name="project" content="game_app v0.1.0">
 
 
-    <title>GameAppWeb.PlayerLive.FormComponent — game_app v0.1.0</title>
+    <title>GameApp.Workers.LongJobWorker — game_app v0.1.0</title>
     <link rel="stylesheet" href="dist/html-elixir-K5ICTFVY.css" />
 
 
@@ -112,18 +112,134 @@ Pages
 <div id="top-content">
   <h1>
 
-    <span translate="no">GameAppWeb.PlayerLive.FormComponent</span> 
+    <span translate="no">GameApp.Workers.LongJobWorker</span> 
     <small class="app-vsn" translate="no">(game_app v0.1.0)</small>
 
   </h1>
 
 
     <section id="moduledoc">
-<p>LiveView module for adding a new player and editing an player's details.</p>
+<p>A worker module for handling long-running jobs using Oban.</p><p>This module defines a worker that processes jobs from the <code class="inline">:long_jobs</code> queue.
+Each job performs a simulated long-running task by sleeping for a random
+amount of time between 1,000 and 10,000 milliseconds.</p>
     </section>
 
 </div>
 
+  <section id="summary" class="details-list">
+    <h1 class="section-heading">
+      <a class="hover-link" href="#summary">
+        <i class="ri-link-m" aria-hidden="true"></i>
+      </a>
+      <span class="text">Summary</span>
+    </h1>
+<div class="summary-functions summary">
+  <h2>
+    <a href="#functions">Functions</a>
+  </h2>
+
+    <div class="summary-row">
+      <div class="summary-signature">
+        <a href="#perform/1" data-no-tooltip translate="no">perform(job)</a>
+
+      </div>
+
+        <div class="summary-synopsis"><p>Executes the job.</p></div>
+
+    </div>
+
+    <div class="summary-row">
+      <div class="summary-signature">
+        <a href="#topic/0" data-no-tooltip translate="no">topic()</a>
+
+      </div>
+
+        <div class="summary-synopsis"><p>Returns the topic for broadcasting job updates.</p></div>
+
+    </div>
+
+</div>
+
+  </section>
+
+
+  <section id="functions" class="details-list">
+    <h1 class="section-heading">
+      <a class="hover-link" href="#functions">
+        <i class="ri-link-m" aria-hidden="true"></i>
+      </a>
+      <span class="text">Functions</span>
+    </h1>
+    <div class="functions-list">
+<section class="detail" id="perform/1">
+
+  <div class="detail-header">
+    <a href="#perform/1" class="detail-link" data-no-tooltip title="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature" translate="no">perform(job)</h1>
+
+
+  </div>
+
+  <section class="docstring">
+
+      <div class="specs">
+
+          <pre translate="no"><span class="attribute">@spec</span> perform(<a href="https://hexdocs.pm/oban/2.17.12/Oban.Job.html#t:t/0">Oban.Job.t</a>()) :: :ok</pre>
+
+      </div>
+
+<p>Executes the job.</p><p>This function is called by Oban when a job is processed. It simulates a long-running
+task by sleeping for a random amount of time and then broadcasts the start and completion
+of the job.</p><h2 id="perform/1-parameters" class="section-heading">
+  <a href="#perform/1-parameters" class="hover-link">
+    <i class="ri-link-m" aria-hidden="true"></i>
+  </a>
+  <span class="text">Parameters</span>
+</h2>
+<ul><li>job: An <a href="https://hexdocs.pm/oban/2.17.12/Oban.Job.html"><code class="inline">Oban.Job</code></a> struct containing the job arguments.</li></ul><h2 id="perform/1-returns" class="section-heading">
+  <a href="#perform/1-returns" class="hover-link">
+    <i class="ri-link-m" aria-hidden="true"></i>
+  </a>
+  <span class="text">Returns</span>
+</h2>
+<ul><li>:ok</li></ul>
+  </section>
+</section>
+<section class="detail" id="topic/0">
+
+  <div class="detail-header">
+    <a href="#topic/0" class="detail-link" data-no-tooltip title="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature" translate="no">topic()</h1>
+
+
+  </div>
+
+  <section class="docstring">
+
+      <div class="specs">
+
+          <pre translate="no"><span class="attribute">@spec</span> topic() :: <a href="https://hexdocs.pm/elixir/String.html#t:t/0">String.t</a>()</pre>
+
+      </div>
+
+<p>Returns the topic for broadcasting job updates.</p><h2 id="topic/0-returns" class="section-heading">
+  <a href="#topic/0-returns" class="hover-link">
+    <i class="ri-link-m" aria-hidden="true"></i>
+  </a>
+  <span class="text">Returns</span>
+</h2>
+<ul><li>The topic as a string.</li></ul>
+  </section>
+</section>
+
+    </div>
+  </section>
 
     <footer class="footer">
       <p>
