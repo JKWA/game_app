@@ -8,7 +8,7 @@
     <meta name="project" content="game_app v0.1.0">
 
 
-    <title>GameAppWeb.LongJobLive.Index — game_app v0.1.0</title>
+    <title>GameApp.LogFormatter — game_app v0.1.0</title>
     <link rel="stylesheet" href="dist/html-elixir-K5ICTFVY.css" />
 
 
@@ -112,11 +112,15 @@ Pages
 <div id="top-content">
   <h1>
 
-    <span translate="no">GameAppWeb.LongJobLive.Index</span> 
+    <span translate="no">GameApp.LogFormatter</span> 
     <small class="app-vsn" translate="no">(game_app v0.1.0)</small>
 
   </h1>
 
+
+    <section id="moduledoc">
+<p>A custom log formatter for <a href="https://hexdocs.pm/logger/Logger.html"><code class="inline">Logger</code></a>.</p>
+    </section>
 
 </div>
 
@@ -134,11 +138,11 @@ Pages
 
     <div class="summary-row">
       <div class="summary-signature">
-        <a href="#render/1" data-no-tooltip translate="no">render(assigns)</a>
+        <a href="#format/4" data-no-tooltip translate="no">format(level, message, timestamp, metadata)</a>
 
       </div>
 
-        <div class="summary-synopsis"><p>Callback implementation for <a href="https://hexdocs.pm/phoenix_live_view/0.19.5/Phoenix.LiveView.html#c:render/1"><code class="inline">Phoenix.LiveView.render/1</code></a>.</p></div>
+        <div class="summary-synopsis"><p>Formats a log entry.</p></div>
 
     </div>
 
@@ -155,21 +159,48 @@ Pages
       <span class="text">Functions</span>
     </h1>
     <div class="functions-list">
-<section class="detail" id="render/1">
+<section class="detail" id="format/4">
 
   <div class="detail-header">
-    <a href="#render/1" class="detail-link" data-no-tooltip title="Link to this function">
+    <a href="#format/4" class="detail-link" data-no-tooltip title="Link to this function">
       <i class="ri-link-m" aria-hidden="true"></i>
       <span class="sr-only">Link to this function</span>
     </a>
-    <h1 class="signature" translate="no">render(assigns)</h1>
+    <h1 class="signature" translate="no">format(level, message, timestamp, metadata)</h1>
 
 
   </div>
 
   <section class="docstring">
 
-<p>Callback implementation for <a href="https://hexdocs.pm/phoenix_live_view/0.19.5/Phoenix.LiveView.html#c:render/1"><code class="inline">Phoenix.LiveView.render/1</code></a>.</p>
+      <div class="specs">
+
+          <pre translate="no"><span class="attribute">@spec</span> format(
+  level :: <a href="https://hexdocs.pm/logger/Logger.html#t:level/0">Logger.level</a>(),
+  message :: <a href="https://hexdocs.pm/logger/Logger.html#t:message/0">Logger.message</a>(),
+  timestamp ::
+    {{<a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">integer</a>(), <a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">integer</a>(), <a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">integer</a>()},
+     {<a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">integer</a>(), <a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">integer</a>(), <a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">integer</a>(), <a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">integer</a>()}},
+  metadata :: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">keyword</a>()
+) :: <a href="https://hexdocs.pm/elixir/IO.html#t:chardata/0">IO.chardata</a>()</pre>
+
+      </div>
+
+<p>Formats a log entry.</p><p>Takes a log <code class="inline">level</code>, <code class="inline">message</code>, <code class="inline">timestamp</code>, and <code class="inline">metadata</code>, and returns a single string line that represents
+the formatted log entry. This format is particularly suitable for log aggregation tools that are optimized
+for key-value based log messages.</p><h2 id="format/4-parameters" class="section-heading">
+  <a href="#format/4-parameters" class="hover-link">
+    <i class="ri-link-m" aria-hidden="true"></i>
+  </a>
+  <span class="text">Parameters</span>
+</h2>
+<ul><li><code class="inline">level</code>: The log level (e.g., <code class="inline">:info</code>, <code class="inline">:debug</code>, <code class="inline">:error</code>).</li><li><code class="inline">message</code>: The log message.</li><li><code class="inline">timestamp</code>: A tuple representing the timestamp of the log entry in the format <code class="inline">{{year, month, day}, {hour, minute, second, millisecond}}</code>.</li><li><code class="inline">metadata</code>: A keyword list of metadata associated with the log entry.</li></ul><h2 id="format/4-returns" class="section-heading">
+  <a href="#format/4-returns" class="hover-link">
+    <i class="ri-link-m" aria-hidden="true"></i>
+  </a>
+  <span class="text">Returns</span>
+</h2>
+<p>A string that represents the log message formatted as a series of key-value pairs, terminated with a newline.</p>
   </section>
 </section>
 
