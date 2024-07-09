@@ -1,10 +1,16 @@
 up:
+	@echo "Creating logs directory..."
+	@mkdir -p ./logs
 	@echo "Starting up all containers..."
-	docker compose up -d
+	@docker compose up -d
 
 down:
 	@echo "Shutting down all containers..."
-	docker compose down
+	@docker compose down
+	@echo "Removing logs directory..."
+	@rm -rf ./logs
+	@echo "Removing loki-data..."
+	@rm -rf ./loki-data
 
 docs:
 	@echo "Generating documentation..."

@@ -11,13 +11,13 @@ services:
       - "5481:5432"
 
   game_db_dev:
-      image: postgres
-      environment:
-        POSTGRES_DB: game_db_dev
-        POSTGRES_USER: dev_user
-        POSTGRES_PASSWORD: dev_password
-      ports:
-        - "5482:5432" 
+    image: postgres
+    environment:
+      POSTGRES_DB: game_db_dev
+      POSTGRES_USER: dev_user
+      POSTGRES_PASSWORD: dev_password
+    ports:
+      - "5482:5432"
 
   get_text_dev_service:
     build:
@@ -34,3 +34,31 @@ services:
       - "8202:8000"
     volumes:
       - ./text-external-service:/app
+
+  grafana:
+    image: grafana/grafana:latest
+    ports:
+      - "3000:3000"
+    environment:
+      - GF_SECURITY_ADMIN_PASSWORD=admin
+    volumes:
+      - grafana-data:/var/lib/grafana
+
+  loki:
+    image: grafana/loki:2.8.0
+    ports:
+      - "3100:3100"
+    command: -config.file=/etc/loki/local-config.yaml
+    volumes:
+      - ./loki-config:/etc/loki
+      - ./loki-data:/loki
+
+  promtail:
+    image: grafana/promtail:2.8.0
+    volumes:
+      - ./promtail-config:/etc/promtail
+      - ./logs:/app/logs
+    command: -config.file=/etc/promtail/promtail-config.yaml
+
+volumes:
+  grafana-data:

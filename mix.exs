@@ -19,7 +19,7 @@ defmodule GameApp.MixProject do
   def application do
     [
       mod: {GameApp.Application, []},
-      extra_applications: [:logger, :runtime_tools]
+      extra_applications: [:logger, :logger_file_backend, :runtime_tools]
     ]
   end
 
@@ -61,7 +61,8 @@ defmodule GameApp.MixProject do
       {:credo, "~> 1.6", only: [:dev, :test], runtime: false},
       {:httpoison, "~> 2.2.1"},
       {:hackney, "~> 1.20.1"},
-      {:oban, "~> 2.17"}
+      {:oban, "~> 2.17"},
+      {:logger_file_backend, "~> 0.0.14"}
     ]
   end
 

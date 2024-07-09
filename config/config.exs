@@ -52,9 +52,32 @@ config :tailwind,
   ]
 
 # Configures Elixir's Logger
+
+common_metadata = [
+  :request_id,
+  :job_id,
+  :job_name,
+  :worker,
+  :attempt,
+  :max_attempts,
+  :queue,
+  :status,
+  :duration
+]
+
 config :logger, :console,
   format: "$time $metadata[$level] $message\n",
-  metadata: [:request_id]
+  metadata: common_metadata,
+  level: :debug
+
+config :logger, :file,
+  path: "logs/prod.log",
+  format: {GameApp.LogFormatter, :format},
+  metadata: common_metadata,
+  level: :info
+
+config :logger,
+  backends: [:console, {LoggerFileBackend, :file}]
 
 # Use Jason for JSON parsing in Phoenix
 config :phoenix, :json_library, Jason

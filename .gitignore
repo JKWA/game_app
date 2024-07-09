@@ -42,5 +42,8 @@ npm-debug.log
 
 /text-external-service/venv/
 /text-external-service/__pycache__/
+/loki-data/
+/logs/
+
 
 dev.secret.exs
