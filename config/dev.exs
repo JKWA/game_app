@@ -66,11 +66,27 @@ config :game_app, GameAppWeb.Endpoint,
 # Enable dev routes for dashboard and mailbox
 config :game_app, dev_routes: true
 
-# # Do not include metadata nor timestamps in development logs
-# config :logger, :console, format: "[$level] $message\n"
+# Enable console logger in development
 
-# config :logger,
-#   backends: [:console]
+common_metadata = [
+  :request_id,
+  :job_id,
+  :job_name,
+  :worker,
+  :attempt,
+  :max_attempts,
+  :queue,
+  :status,
+  :duration
+]
+
+config :logger, :console,
+  format: "$time $metadata[$level] $message\n",
+  metadata: common_metadata,
+  level: :debug
+
+config :logger,
+  backends: [:console, {LoggerFileBackend, :file}]
 
 # Set a higher stacktrace during development. Avoid configuring such
 # in production as building large stacktraces may be expensive.

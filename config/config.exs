@@ -65,19 +65,14 @@ common_metadata = [
   :duration
 ]
 
-config :logger, :console,
-  format: "$time $metadata[$level] $message\n",
-  metadata: common_metadata,
-  level: :debug
-
 config :logger, :file,
   path: "logs/prod.log",
-  format: {GameApp.LogFormatter, :format},
+  format: {GameApp.LoggerFormatter, :format},
   metadata: common_metadata,
   level: :info
 
 config :logger,
-  backends: [:console, {LoggerFileBackend, :file}]
+  backends: [{LoggerFileBackend, :file}]
 
 # Use Jason for JSON parsing in Phoenix
 config :phoenix, :json_library, Jason
