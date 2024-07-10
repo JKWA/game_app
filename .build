@@ -5,7 +5,7 @@ GameApp.External.TextExtractBehaviour.html
 GameApp.External.TextExtractDevService.html
 GameApp.External.TextExtractProdService.html
 GameApp.External.TextExtractService.html
-GameApp.LogFormatter.html
+GameApp.LoggerFormatter.html
 GameApp.Mailer.html
 GameApp.Repo.html
 GameApp.Websites.GetText.html
@@ -47,7 +47,7 @@ dist/lato-latin-ext-300-normal-VPGGJKJL.woff2
 dist/lato-latin-ext-400-normal-N27NCBWW.woff2
 dist/lato-latin-ext-700-normal-Q2L5DVMW.woff2
 dist/remixicon-NKANDIL5.woff2
-dist/search_data-25AEC464.js
-dist/sidebar_items-3BCD2EEA.js
+dist/search_data-2663E39F.js
+dist/sidebar_items-7EE59958.js
 index.html
 search.html
