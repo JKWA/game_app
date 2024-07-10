@@ -55,7 +55,11 @@ config :tailwind,
 
 common_metadata = [
   :request_id,
-  :job_id,
+  :trace_id,
+  :span_id,
+  :parent_span_id,
+  :start_time,
+  :end_time,
   :job_name,
   :worker,
   :attempt,

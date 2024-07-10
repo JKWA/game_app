@@ -3,26 +3,6 @@ defmodule GameApp.LoggerFormatter do
   A custom log formatter for `Logger`.
   """
 
-  @common_metadata [
-    :request_id,
-    :job_id,
-    :job_name,
-    :worker,
-    :attempt,
-    :max_attempts,
-    :queue,
-    :status,
-    :duration
-  ]
-
-  @doc """
-  Returns the common metadata keys that are included in every log entry.
-  """
-  @spec common_metadata() :: [atom()]
-  def common_metadata do
-    @common_metadata
-  end
-
   @doc """
   Formats a log entry.
 
