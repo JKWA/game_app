@@ -5,6 +5,7 @@ GameApp.External.TextExtractBehaviour.html
 GameApp.External.TextExtractDevService.html
 GameApp.External.TextExtractProdService.html
 GameApp.External.TextExtractService.html
+GameApp.Games.TicTacToe.html
 GameApp.LoggerFormatter.html
 GameApp.Mailer.html
 GameApp.Repo.html
@@ -28,6 +29,7 @@ GameAppWeb.PlayerLive.Index.html
 GameAppWeb.PlayerLive.Show.html
 GameAppWeb.Router.html
 GameAppWeb.Telemetry.html
+GameAppWeb.TicTacToeLive.Index.html
 GameAppWeb.html
 api-reference.html
 dist/handlebars.runtime-NWIB6V2M.js
@@ -47,7 +49,7 @@ dist/lato-latin-ext-300-normal-VPGGJKJL.woff2
 dist/lato-latin-ext-400-normal-N27NCBWW.woff2
 dist/lato-latin-ext-700-normal-Q2L5DVMW.woff2
 dist/remixicon-NKANDIL5.woff2
-dist/search_data-DDCDD210.js
-dist/sidebar_items-E9CACC0A.js
+dist/search_data-E4120338.js
+dist/sidebar_items-E32ECC7E.js
 index.html
 search.html
