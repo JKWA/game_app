@@ -27,9 +27,7 @@ defmodule GameAppWeb.TicTacToeLive.Index do
   end
 
   @impl true
-  @doc """
-  Handles the client's event to mark a position on the board.
-  """
+
   def handle_event("mark", %{"position" => position}, socket) do
     TicTacToe.mark(String.to_atom(position))
     {:noreply, socket}
