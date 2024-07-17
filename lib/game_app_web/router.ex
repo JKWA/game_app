@@ -31,6 +31,8 @@ defmodule GameAppWeb.Router do
     live "/increment", IncrementLive.Index, :index
 
     live "/long-job", LongJobLive.Index, :index
+
+    live "/tic-tac-toe", TicTacToeLive.Index, :index
   end
 
   # Other scopes may use custom stacks.

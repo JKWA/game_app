@@ -1,0 +1,37 @@
+<div class="p-8">
+    <.header>
+        Tic Tac Toe
+        <:subtitle>
+        <%= case assigns.game_state.game_status do %>
+            <% :ongoing -> %>
+                Current turn: <%= Atom.to_string(assigns.game_state.current_player) |> String.upcase() %>
+            <% :win -> %>
+                Winner: <%= Atom.to_string(assigns.game_state.current_player) |> String.upcase() %>
+            <% :tie -> %>
+                Game ended in a tie.
+            <% end %>
+        </:subtitle>
+        <:actions>
+            <%= if assigns.game_state.game_status != :ongoing do %>
+                <.button phx-click="reset">
+                    Reset Game
+                </.button>
+            <% end %>
+
+        </:actions>   
+      </.header>
+
+    <div class="mt-6 grid grid-cols-3 gap-4">
+      <%= for {key, value} <- Map.to_list(assigns.game_state.board) do %>
+        <.button
+            class={button_class(assigns, key)}
+            disabled={assigns.game_state.game_status != :ongoing}
+            phx-click="mark"
+            phx-value-position={key}
+        >
+            <%= if value, do: Atom.to_string(value) |> String.upcase(), else: "-" %>
+        </.button>
+      <% end %>
+    </div>
+   
+  </div>

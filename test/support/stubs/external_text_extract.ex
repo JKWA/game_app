@@ -34,5 +34,5 @@ defmodule GameApp.Stubs.TextExtractService do
   @doc """
   Retrieves the predefined error URL that triggers an error response when used with `extract_text/1`.
   """
-  def get_error_url(), do: @error_url
+  def get_error_url, do: @error_url
 end

@@ -4,7 +4,7 @@ defmodule GameApp.Application do
   @moduledoc false
 
   use Application
-
+  alias GameApp.Games.TicTacToe
   @impl true
   def start(_type, _args) do
     children = [
@@ -18,6 +18,10 @@ defmodule GameApp.Application do
       {Phoenix.PubSub, name: GameApp.PubSub},
       # Start Finch
       {Finch, name: GameApp.Finch},
+
+      # Start TicTacToe
+      {TicTacToe, name: TicTacToe},
+
       # Start the Endpoint (http/https)
       GameAppWeb.Endpoint
       # Start a worker by calling: GameApp.Worker.start_link(arg)
