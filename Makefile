@@ -39,6 +39,8 @@ migrate.dev:
 
 serve.dev:
 	@echo "Running migrations for development environment..."
+	MIX_ENV=dev mix clean
+	MIX_ENV=dev mix compile
 	MIX_ENV=dev mix phx.server
 
 reset.dev:

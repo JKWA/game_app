@@ -1,39 +1,20 @@
-defmodule GameApp.Games.TicTacToe do
+defmodule GameApp.Games.TicTacToe.WithAgent do
   @moduledoc """
   A module to handle the Tic Tac Toe game logic and state management using an Agent.
   """
-
   use Agent
   require Logger
+  alias GameApp.Games.TicTacToe.GameLogic
 
   @tic_tac_toe_topic "tic_tac_toe"
   @valid_positions [:a1, :a2, :a3, :b1, :b2, :b3, :c1, :c2, :c3]
 
-  defstruct board: Enum.reduce(@valid_positions, %{}, fn pos, acc -> Map.put(acc, pos, nil) end),
-            current_player: :x,
-            win: nil,
-            game_status: :ongoing
-
-  @type player() :: :x | :o
-  @type board() :: %{
-          optional(atom) => :x | :o | nil
-        }
-  @type win() :: list(atom) | nil
-  @type game_status() :: :ongoing | :win | :tie
-  @type t :: %__MODULE__{
-          board: board(),
-          current_player: player(),
-          win: win(),
-          game_status: game_status()
-        }
-  @type position() :: :a1 | :a2 | :a3 | :b1 | :b2 | :b3 | :c1 | :c2 | :c3
-
   @doc """
   Returns the initial state of the Tic Tac Toe game.
   """
-  @spec initial_state() :: GameApp.Games.TicTacToe.t()
+  @spec initial_state() :: GameLogic.t()
   def initial_state do
-    %__MODULE__{}
+    %GameLogic{} |> Map.put(:topic, @tic_tac_toe_topic)
   end
 
   @doc """
@@ -48,7 +29,10 @@ defmodule GameApp.Games.TicTacToe do
   @spec start_link(Keyword.t()) ::
           {:ok, pid()} | {:error, {:already_started, pid()} | {:shutdown, term()} | term()}
   def start_link(opts \\ []) do
-    Agent.start_link(fn -> initial_state() end, opts)
+    with {:ok, pid} <- Agent.start_link(fn -> initial_state() end, opts) do
+      broadcast_update(:update, initial_state())
+      {:ok, pid}
+    end
   end
 
   @doc """
@@ -68,7 +52,7 @@ defmodule GameApp.Games.TicTacToe do
   @doc """
   Retrieves the current state of the game.
   """
-  @spec get_state() :: t()
+  @spec get_state() :: GameLogic.t()
   def get_state do
     Agent.get(__MODULE__, & &1)
   end
@@ -89,13 +73,13 @@ defmodule GameApp.Games.TicTacToe do
       iex> GameApp.Games.TicTacToe.mark(:a1)
       {:error, :invalid_position}
   """
-  @spec mark(position()) :: :ok | {:error, :invalid_position}
+  @spec mark(GameLogic.position()) :: :ok | {:error, :invalid_position}
   def mark(position) when position in @valid_positions do
     Agent.update(__MODULE__, fn state ->
       case Map.get(state.board, position) do
         nil ->
           new_board = Map.put(state.board, position, state.current_player)
-          {new_player, new_winner, new_game_status} = update_game(state, new_board)
+          {new_player, new_winner, new_game_status} = GameLogic.update_game(state, new_board)
 
           new_state = %{
             state
@@ -116,68 +100,23 @@ defmodule GameApp.Games.TicTacToe do
 
   def mark(_position), do: {:error, :invalid_position}
 
-  @doc false
-  @spec switch_player(player()) :: player()
-  defp switch_player(:x), do: :o
-  defp switch_player(:o), do: :x
-
-  @doc false
-  @spec update_game(t(), board()) :: {player(), win(), game_status()}
-  defp update_game(state, new_board) do
-    win = check_winner(new_board)
-
-    game_status =
-      cond do
-        win -> :win
-        check_tie(new_board) -> :tie
-        true -> :ongoing
-      end
-
-    new_player = if win, do: state.current_player, else: switch_player(state.current_player)
-
-    {new_player, win, game_status}
-  end
-
-  @doc false
-  @spec check_winner(board()) :: win()
-  defp check_winner(board) do
-    winning_combinations = [
-      [:a1, :a2, :a3],
-      [:b1, :b2, :b3],
-      [:c1, :c2, :c3],
-      [:a1, :b1, :c1],
-      [:a2, :b2, :c2],
-      [:a3, :b3, :c3],
-      [:a1, :b2, :c3],
-      [:a3, :b2, :c1]
-    ]
-
-    Enum.find(winning_combinations, fn combo ->
-      [c1, c2, c3] = Enum.map(combo, &Map.get(board, &1))
-      c1 == c2 and c2 == c3 and not is_nil(c1)
-    end) || nil
-  end
-
-  @doc false
-  @spec check_tie(board()) :: boolean()
-  defp check_tie(board) do
-    Map.values(board) |> Enum.all?(&(&1 != nil))
-  end
-
   @doc """
-  Returns the topic for broadcasting game updates.
-
-  ## Examples
-      iex> GameApp.Games.TicTacToe.topic()
-      "tic_tac_toe"
+  Crashes the Agent intentionally for testing purposes.
   """
-  @spec topic() :: String.t()
-  def topic do
-    @tic_tac_toe_topic
+  @spec crash_server() :: no_return()
+  def crash_server do
+    Agent.update(__MODULE__, fn _state ->
+      raise "BOMB!!!"
+    end)
   end
 
+  # @spec topic() :: String.t()
+  # def topic do
+  #   @tic_tac_toe_topic
+  # end
+
   @doc false
-  @spec broadcast_update(atom(), t()) :: :ok
+  @spec broadcast_update(atom(), GameLogic.t()) :: :ok
   defp broadcast_update(action, state) do
     case Phoenix.PubSub.broadcast(GameApp.PubSub, @tic_tac_toe_topic, {action, state}) do
       :ok ->

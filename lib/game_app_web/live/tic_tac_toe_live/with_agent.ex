@@ -1,19 +1,20 @@
-defmodule GameAppWeb.TicTacToeLive.Index do
+defmodule GameAppWeb.TicTacToeLive.WithAgent do
   @moduledoc """
   LiveView for Tic Tac Toe game.
   """
 
   use GameAppWeb, :live_view
-  alias GameApp.Games.TicTacToe
+  alias GameApp.Games.TicTacToe.WithAgent
 
   @impl true
   @doc """
-  Mounts the LiveView and subscribes to the TicTacToe topic.
+  Mounts the LiveView and subscribes to the WithAgent topic.
   """
   def mount(_params, _session, socket) do
-    Phoenix.PubSub.subscribe(GameApp.PubSub, TicTacToe.topic())
+    state = WithAgent.get_state()
 
-    state = TicTacToe.get_state()
+    Phoenix.PubSub.subscribe(GameApp.PubSub, state.topic)
+
     {:ok, assign(socket, game_state: state)}
   end
 
@@ -22,14 +23,19 @@ defmodule GameAppWeb.TicTacToeLive.Index do
   Handles the client events to reset the game state and mark a position on the board.
   """
   def handle_event("reset", _, socket) do
-    TicTacToe.reset()
+    WithAgent.reset()
     {:noreply, socket}
   end
 
   @impl true
+  def handle_event("crash", _, socket) do
+    WithAgent.crash_server()
+    {:noreply, socket}
+  end
 
+  @impl true
   def handle_event("mark", %{"position" => position}, socket) do
-    TicTacToe.mark(String.to_atom(position))
+    WithAgent.mark(String.to_atom(position))
     {:noreply, socket}
   end
 

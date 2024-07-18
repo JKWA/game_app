@@ -32,7 +32,9 @@ defmodule GameAppWeb.Router do
 
     live "/long-job", LongJobLive.Index, :index
 
-    live "/tic-tac-toe", TicTacToeLive.Index, :index
+    live "/tic-tac-toe", TicTacToeLive.WithAgent, :index
+
+    live "/tic-tac-toe/:server", TicTacToeLive.GenServer, :index
   end
 
   # Other scopes may use custom stacks.

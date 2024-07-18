@@ -19,8 +19,13 @@ defmodule GameApp.Application do
       # Start Finch
       {Finch, name: GameApp.Finch},
 
-      # Start TicTacToe
-      {TicTacToe, name: TicTacToe},
+      # Start Global TicTacToe
+      {TicTacToe.WithAgent, name: TicTacToe.WithAgent},
+
+      # Start the TicTacToe Registry
+      {Registry, keys: :unique, name: GameApp.Registry},
+      {DynamicSupervisor, strategy: :one_for_one, name: GameApp.DynamicSupervisor},
+      TicTacToe.Registry,
 
       # Start the Endpoint (http/https)
       GameAppWeb.Endpoint

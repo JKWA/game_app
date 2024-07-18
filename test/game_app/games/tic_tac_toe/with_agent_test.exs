@@ -1,10 +1,10 @@
-defmodule GameApp.Games.TicTacToeTest do
+defmodule GameApp.Games.TicTacToe.WithGenTest do
   @moduledoc """
   Tests for the TicTacToe game module.
   """
 
   use ExUnit.Case, async: false
-  alias GameApp.Games.TicTacToe
+  alias GameApp.Games.TicTacToe.WithAgent, as: TicTacToe
 
   setup do
     {:ok, _pid} = TicTacToe.start_link()
