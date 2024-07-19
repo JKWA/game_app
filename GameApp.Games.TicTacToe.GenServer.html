@@ -14,7 +14,7 @@
 
     <script src="dist/handlebars.runtime-NWIB6V2M.js"></script>
     <script src="dist/handlebars.templates-K7URE6B4.js"></script>
-    <script src="dist/sidebar_items-5B878B17.js"></script>
+    <script src="dist/sidebar_items-E0104312.js"></script>
     <script src="docs_config.js"></script>
     <script async src="dist/html-Q4PYR6ZR.js"></script>
 
@@ -119,7 +119,8 @@ Pages
 
 
     <section id="moduledoc">
-<p>A module to handle the Tic Tac Toe game logic and state management using a GenServer.</p>
+<p>A GenServer module to handle Tic Tac Toe game logic and state management.</p><p>This module implements the <a href="GameApp.Games.TicTacToe.Behavior.html"><code class="inline">GameApp.Games.TicTacToe.Behavior</code></a> to manage the game state,
+handle player moves, and broadcast updates using Phoenix PubSub.</p>
     </section>
 
 </div>
@@ -152,7 +153,7 @@ Pages
 
       </div>
 
-        <div class="summary-synopsis"><p>Crashes the server</p></div>
+        <div class="summary-synopsis"><p>Crashes the server.</p></div>
 
     </div>
 
@@ -162,6 +163,8 @@ Pages
 
       </div>
 
+        <div class="summary-synopsis"><p>Retrieves the current state of the game.</p></div>
+
     </div>
 
     <div class="summary-row">
@@ -169,6 +172,8 @@ Pages
         <a href="#initial_state/1" data-no-tooltip translate="no">initial_state(topic)</a>
 
       </div>
+
+        <div class="summary-synopsis"><p>Initializes the game state with a given topic.</p></div>
 
     </div>
 
@@ -178,6 +183,8 @@ Pages
 
       </div>
 
+        <div class="summary-synopsis"><p>Marks a position on the game board.</p></div>
+
     </div>
 
     <div class="summary-row">
@@ -185,6 +192,8 @@ Pages
         <a href="#reset/1" data-no-tooltip translate="no">reset(pid)</a>
 
       </div>
+
+        <div class="summary-synopsis"><p>Resets the game state.</p></div>
 
     </div>
 
@@ -194,13 +203,7 @@ Pages
 
       </div>
 
-    </div>
-
-    <div class="summary-row">
-      <div class="summary-signature">
-        <a href="#topic/1" data-no-tooltip translate="no">topic(pid)</a>
-
-      </div>
+        <div class="summary-synopsis"><p>Starts the GenServer with the given options.</p></div>
 
     </div>
 
@@ -254,7 +257,19 @@ Pages
 
       </div>
 
-<p>Crashes the server</p>
+<p>Crashes the server.</p><h2 id="crash_server/1-parameters" class="section-heading">
+  <a href="#crash_server/1-parameters" class="hover-link">
+    <i class="ri-link-m" aria-hidden="true"></i>
+  </a>
+  <span class="text">Parameters</span>
+</h2>
+<ul><li>pid: The process identifier of the GenServer.</li></ul><h2 id="crash_server/1-returns" class="section-heading">
+  <a href="#crash_server/1-returns" class="hover-link">
+    <i class="ri-link-m" aria-hidden="true"></i>
+  </a>
+  <span class="text">Returns</span>
+</h2>
+<ul><li>:ok</li></ul>
   </section>
 </section>
 <section class="detail" id="get_state/1">
@@ -271,7 +286,19 @@ Pages
 
   <section class="docstring">
 
-
+<p>Retrieves the current state of the game.</p><h2 id="get_state/1-parameters" class="section-heading">
+  <a href="#get_state/1-parameters" class="hover-link">
+    <i class="ri-link-m" aria-hidden="true"></i>
+  </a>
+  <span class="text">Parameters</span>
+</h2>
+<ul><li>pid: The process identifier of the GenServer.</li></ul><h2 id="get_state/1-returns" class="section-heading">
+  <a href="#get_state/1-returns" class="hover-link">
+    <i class="ri-link-m" aria-hidden="true"></i>
+  </a>
+  <span class="text">Returns</span>
+</h2>
+<ul><li>The current game state.</li></ul>
   </section>
 </section>
 <section class="detail" id="initial_state/1">
@@ -295,7 +322,19 @@ Pages
 
       </div>
 
-
+<p>Initializes the game state with a given topic.</p><h2 id="initial_state/1-parameters" class="section-heading">
+  <a href="#initial_state/1-parameters" class="hover-link">
+    <i class="ri-link-m" aria-hidden="true"></i>
+  </a>
+  <span class="text">Parameters</span>
+</h2>
+<ul><li>topic: The PubSub topic for broadcasting updates.</li></ul><h2 id="initial_state/1-returns" class="section-heading">
+  <a href="#initial_state/1-returns" class="hover-link">
+    <i class="ri-link-m" aria-hidden="true"></i>
+  </a>
+  <span class="text">Returns</span>
+</h2>
+<ul><li>The initial game state as a <code class="inline">%GameLogic{}</code> struct.</li></ul>
   </section>
 </section>
 <section class="detail" id="mark/2">
@@ -312,7 +351,19 @@ Pages
 
   <section class="docstring">
 
-
+<p>Marks a position on the game board.</p><h2 id="mark/2-parameters" class="section-heading">
+  <a href="#mark/2-parameters" class="hover-link">
+    <i class="ri-link-m" aria-hidden="true"></i>
+  </a>
+  <span class="text">Parameters</span>
+</h2>
+<ul><li>pid: The process identifier of the GenServer.</li><li>position: The position to mark (must be a valid position).</li></ul><h2 id="mark/2-returns" class="section-heading">
+  <a href="#mark/2-returns" class="hover-link">
+    <i class="ri-link-m" aria-hidden="true"></i>
+  </a>
+  <span class="text">Returns</span>
+</h2>
+<ul><li>:ok if the position is valid.</li><li><code class="inline">{:error, :invalid_position}</code> if the position is invalid.</li></ul>
   </section>
 </section>
 <section class="detail" id="reset/1">
@@ -329,7 +380,19 @@ Pages
 
   <section class="docstring">
 
-
+<p>Resets the game state.</p><h2 id="reset/1-parameters" class="section-heading">
+  <a href="#reset/1-parameters" class="hover-link">
+    <i class="ri-link-m" aria-hidden="true"></i>
+  </a>
+  <span class="text">Parameters</span>
+</h2>
+<ul><li>pid: The process identifier of the GenServer.</li></ul><h2 id="reset/1-returns" class="section-heading">
+  <a href="#reset/1-returns" class="hover-link">
+    <i class="ri-link-m" aria-hidden="true"></i>
+  </a>
+  <span class="text">Returns</span>
+</h2>
+<ul><li>:ok</li></ul>
   </section>
 </section>
 <section class="detail" id="start_link/1">
@@ -348,24 +411,19 @@ Pages
 
   <section class="docstring">
 
-
-  </section>
-</section>
-<section class="detail" id="topic/1">
-
-  <div class="detail-header">
-    <a href="#topic/1" class="detail-link" data-no-tooltip title="Link to this function">
-      <i class="ri-link-m" aria-hidden="true"></i>
-      <span class="sr-only">Link to this function</span>
-    </a>
-    <h1 class="signature" translate="no">topic(pid)</h1>
-
-
-  </div>
-
-  <section class="docstring">
-
-
+<p>Starts the GenServer with the given options.</p><h2 id="start_link/1-options" class="section-heading">
+  <a href="#start_link/1-options" class="hover-link">
+    <i class="ri-link-m" aria-hidden="true"></i>
+  </a>
+  <span class="text">Options</span>
+</h2>
+<ul><li>:topic (optional): The PubSub topic for broadcasting updates. Defaults to <code class="inline">@default_topic</code>.</li></ul><h2 id="start_link/1-returns" class="section-heading">
+  <a href="#start_link/1-returns" class="hover-link">
+    <i class="ri-link-m" aria-hidden="true"></i>
+  </a>
+  <span class="text">Returns</span>
+</h2>
+<ul><li><code class="inline">{:ok, pid}</code> on success.</li></ul>
   </section>
 </section>
 

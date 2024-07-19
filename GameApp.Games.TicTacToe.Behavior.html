@@ -8,7 +8,7 @@
     <meta name="project" content="game_app v0.1.0">
 
 
-    <title>GameApp.LoggerFormatter — game_app v0.1.0</title>
+    <title>GameApp.Games.TicTacToe.Behavior — game_app v0.1.0</title>
     <link rel="stylesheet" href="dist/html-elixir-K5ICTFVY.css" />
 
 
@@ -19,7 +19,7 @@
     <script async src="dist/html-Q4PYR6ZR.js"></script>
 
   </head>
-  <body data-type="modules" class="page-module">
+  <body data-type="modules" class="page-behaviour">
     <script>
 
       try {
@@ -112,14 +112,14 @@ Pages
 <div id="top-content">
   <h1>
 
-    <span translate="no">GameApp.LoggerFormatter</span> 
+    <span translate="no">GameApp.Games.TicTacToe.Behavior</span> <small>behaviour</small>
     <small class="app-vsn" translate="no">(game_app v0.1.0)</small>
 
   </h1>
 
 
     <section id="moduledoc">
-<p>A custom log formatter for <a href="https://hexdocs.pm/logger/Logger.html"><code class="inline">Logger</code></a>.</p>
+<p>A behaviour module for the Tic Tac Toe GenServer game logic and state management.</p>
     </section>
 
 </div>
@@ -131,18 +131,40 @@ Pages
       </a>
       <span class="text">Summary</span>
     </h1>
-<div class="summary-functions summary">
+<div class="summary-callbacks summary">
   <h2>
-    <a href="#functions">Functions</a>
+    <a href="#callbacks">Callbacks</a>
   </h2>
 
     <div class="summary-row">
       <div class="summary-signature">
-        <a href="#format/4" data-no-tooltip translate="no">format(level, message, timestamp, metadata)</a>
+        <a href="#c:crash_server/1" data-no-tooltip translate="no">crash_server(name_or_pid)</a>
 
       </div>
 
-        <div class="summary-synopsis"><p>Formats a log entry.</p></div>
+    </div>
+
+    <div class="summary-row">
+      <div class="summary-signature">
+        <a href="#c:get_state/1" data-no-tooltip translate="no">get_state(name_or_pid)</a>
+
+      </div>
+
+    </div>
+
+    <div class="summary-row">
+      <div class="summary-signature">
+        <a href="#c:mark/2" data-no-tooltip translate="no">mark(name_or_pid, position)</a>
+
+      </div>
+
+    </div>
+
+    <div class="summary-row">
+      <div class="summary-signature">
+        <a href="#c:reset/1" data-no-tooltip translate="no">reset(name_or_pid)</a>
+
+      </div>
 
     </div>
 
@@ -151,22 +173,22 @@ Pages
   </section>
 
 
-  <section id="functions" class="details-list">
+  <section id="callbacks" class="details-list">
     <h1 class="section-heading">
-      <a class="hover-link" href="#functions">
+      <a class="hover-link" href="#callbacks">
         <i class="ri-link-m" aria-hidden="true"></i>
       </a>
-      <span class="text">Functions</span>
+      <span class="text">Callbacks</span>
     </h1>
-    <div class="functions-list">
-<section class="detail" id="format/4">
+    <div class="callbacks-list">
+<section class="detail" id="c:crash_server/1">
 
   <div class="detail-header">
-    <a href="#format/4" class="detail-link" data-no-tooltip title="Link to this function">
+    <a href="#c:crash_server/1" class="detail-link" data-no-tooltip title="Link to this callback">
       <i class="ri-link-m" aria-hidden="true"></i>
-      <span class="sr-only">Link to this function</span>
+      <span class="sr-only">Link to this callback</span>
     </a>
-    <h1 class="signature" translate="no">format(level, message, timestamp, metadata)</h1>
+    <h1 class="signature" translate="no">crash_server(name_or_pid)</h1>
 
 
   </div>
@@ -175,32 +197,80 @@ Pages
 
       <div class="specs">
 
-          <pre translate="no"><span class="attribute">@spec</span> format(
-  level :: <a href="https://hexdocs.pm/logger/Logger.html#t:level/0">Logger.level</a>(),
-  message :: <a href="https://hexdocs.pm/logger/Logger.html#t:message/0">Logger.message</a>(),
-  timestamp ::
-    {{<a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">integer</a>(), <a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">integer</a>(), <a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">integer</a>()},
-     {<a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">integer</a>(), <a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">integer</a>(), <a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">integer</a>(), <a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">integer</a>()}},
-  metadata :: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">keyword</a>()
-) :: <a href="https://hexdocs.pm/elixir/IO.html#t:chardata/0">IO.chardata</a>()</pre>
+          <pre translate="no"><span class="attribute">@callback</span> crash_server(name_or_pid :: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>()) :: :ok</pre>
 
       </div>
 
-<p>Formats a log entry.</p><p>Takes a log <code class="inline">level</code>, <code class="inline">message</code>, <code class="inline">timestamp</code>, and <code class="inline">metadata</code>, and returns a single string line that represents
-the formatted log entry. This format is particularly suitable for log aggregation tools that are optimized
-for key-value based log messages.</p><h2 id="format/4-parameters" class="section-heading">
-  <a href="#format/4-parameters" class="hover-link">
-    <i class="ri-link-m" aria-hidden="true"></i>
-  </a>
-  <span class="text">Parameters</span>
-</h2>
-<ul><li><code class="inline">level</code>: The log level (e.g., <code class="inline">:info</code>, <code class="inline">:debug</code>, <code class="inline">:error</code>).</li><li><code class="inline">message</code>: The log message.</li><li><code class="inline">timestamp</code>: A tuple representing the timestamp of the log entry in the format <code class="inline">{{year, month, day}, {hour, minute, second, millisecond}}</code>.</li><li><code class="inline">metadata</code>: A keyword list of metadata associated with the log entry.</li></ul><h2 id="format/4-returns" class="section-heading">
-  <a href="#format/4-returns" class="hover-link">
-    <i class="ri-link-m" aria-hidden="true"></i>
-  </a>
-  <span class="text">Returns</span>
-</h2>
-<p>A string that represents the log message formatted as a series of key-value pairs, terminated with a newline.</p>
+
+  </section>
+</section>
+<section class="detail" id="c:get_state/1">
+
+  <div class="detail-header">
+    <a href="#c:get_state/1" class="detail-link" data-no-tooltip title="Link to this callback">
+      <i class="ri-link-m" aria-hidden="true"></i>
+      <span class="sr-only">Link to this callback</span>
+    </a>
+    <h1 class="signature" translate="no">get_state(name_or_pid)</h1>
+
+
+  </div>
+
+  <section class="docstring">
+
+      <div class="specs">
+
+          <pre translate="no"><span class="attribute">@callback</span> get_state(name_or_pid :: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>()) :: <a href="GameApp.Games.TicTacToe.GameLogic.html#t:t/0">GameApp.Games.TicTacToe.GameLogic.t</a>()</pre>
+
+      </div>
+
+
+  </section>
+</section>
+<section class="detail" id="c:mark/2">
+
+  <div class="detail-header">
+    <a href="#c:mark/2" class="detail-link" data-no-tooltip title="Link to this callback">
+      <i class="ri-link-m" aria-hidden="true"></i>
+      <span class="sr-only">Link to this callback</span>
+    </a>
+    <h1 class="signature" translate="no">mark(name_or_pid, position)</h1>
+
+
+  </div>
+
+  <section class="docstring">
+
+      <div class="specs">
+
+          <pre translate="no"><span class="attribute">@callback</span> mark(name_or_pid :: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>(), position :: <a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">atom</a>()) :: :ok</pre>
+
+      </div>
+
+
+  </section>
+</section>
+<section class="detail" id="c:reset/1">
+
+  <div class="detail-header">
+    <a href="#c:reset/1" class="detail-link" data-no-tooltip title="Link to this callback">
+      <i class="ri-link-m" aria-hidden="true"></i>
+      <span class="sr-only">Link to this callback</span>
+    </a>
+    <h1 class="signature" translate="no">reset(name_or_pid)</h1>
+
+
+  </div>
+
+  <section class="docstring">
+
+      <div class="specs">
+
+          <pre translate="no"><span class="attribute">@callback</span> reset(name_or_pid :: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>()) :: :ok</pre>
+
+      </div>
+
+
   </section>
 </section>
 
