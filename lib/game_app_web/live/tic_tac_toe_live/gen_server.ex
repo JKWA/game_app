@@ -5,6 +5,24 @@ defmodule GameAppWeb.TicTacToeLive.GenServer do
 
   use GameAppWeb, :live_view
   alias GameApp.Games.TicTacToe.Registry
+  alias GameAppWeb.TicTacToeLive.Board
+  alias GameAppWeb.TicTacToeLive.Navigate
+
+  @impl true
+  def render(assigns) do
+    ~H"""
+    <div class="p-8">
+      <.live_component module={Navigate} id="navigate_1" />
+
+      <.live_component
+        module={Board}
+        id="gen_server_game_board_1"
+        game_state={assigns.game_state}
+        game_server={assigns.game_server}
+      />
+    </div>
+    """
+  end
 
   @impl true
   @doc """
@@ -16,7 +34,13 @@ defmodule GameAppWeb.TicTacToeLive.GenServer do
 
     Phoenix.PubSub.subscribe(GameApp.PubSub, state.topic)
 
-    {:ok, assign(socket, game_state: state, tictactoe_server: server_atom)}
+    new_socket =
+      socket
+      |> assign(game_state: state)
+      |> assign(tictactoe_server: server_atom)
+      |> assign(game_server: server)
+
+    {:ok, new_socket}
   end
 
   @impl true
@@ -46,15 +70,5 @@ defmodule GameAppWeb.TicTacToeLive.GenServer do
   """
   def handle_info({:update, new_state}, socket) do
     {:noreply, assign(socket, game_state: new_state)}
-  end
-
-  @doc false
-  def button_class(assigns, key) do
-    is_winner = is_list(assigns.game_state.win) && Enum.member?(assigns.game_state.win, key)
-
-    base_class = "h-32 text-4xl "
-    winner_class = if is_winner, do: "bg-green-400 hover:bg-green-400", else: ""
-
-    base_class <> winner_class
   end
 end

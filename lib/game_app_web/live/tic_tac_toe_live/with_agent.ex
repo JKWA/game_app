@@ -5,6 +5,24 @@ defmodule GameAppWeb.TicTacToeLive.WithAgent do
 
   use GameAppWeb, :live_view
   alias GameApp.Games.TicTacToe.WithAgent
+  alias GameAppWeb.TicTacToeLive.Board
+  alias GameAppWeb.TicTacToeLive.Navigate
+
+  @impl true
+  def render(assigns) do
+    ~H"""
+    <div class="p-8">
+      <.live_component module={Navigate} id="navigate_1" />
+
+      <.live_component
+        module={Board}
+        id="agent_game_board_1"
+        game_state={assigns.game_state}
+        game_server="global"
+      />
+    </div>
+    """
+  end
 
   @impl true
   @doc """
@@ -45,15 +63,5 @@ defmodule GameAppWeb.TicTacToeLive.WithAgent do
   """
   def handle_info({:update, new_state}, socket) do
     {:noreply, assign(socket, game_state: new_state)}
-  end
-
-  @doc false
-  def button_class(assigns, key) do
-    is_winner = is_list(assigns.game_state.win) && Enum.member?(assigns.game_state.win, key)
-
-    base_class = "h-32 text-4xl "
-    winner_class = if is_winner, do: "bg-green-400 hover:bg-green-400", else: ""
-
-    base_class <> winner_class
   end
 end

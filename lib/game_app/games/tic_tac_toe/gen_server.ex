@@ -148,17 +148,6 @@ defmodule GameApp.Games.TicTacToe.GenServer do
     raise "BOMB!!!"
   end
 
-  @doc """
-  Broadcasts an update to the given topic.
-
-  ## Parameters
-    - action: The action to broadcast.
-    - state: The current game state.
-
-  ## Returns
-    - :ok on success.
-    - :error if broadcasting fails.
-  """
   @spec broadcast_update(atom(), GameLogic.t()) :: :ok
   defp broadcast_update(action, state) do
     case Phoenix.PubSub.broadcast(GameApp.PubSub, state.topic, {action, state}) do
