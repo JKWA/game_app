@@ -12,10 +12,10 @@ defmodule GameAppWeb.TicTacToeLive.GenServer do
   """
   def mount(%{"server" => server}, _session, socket) do
     server_atom = String.to_existing_atom(server)
-    topic = Registry.topic(server_atom)
-    Phoenix.PubSub.subscribe(GameApp.PubSub, topic)
-
     state = Registry.get_state(server_atom)
+
+    Phoenix.PubSub.subscribe(GameApp.PubSub, state.topic)
+
     {:ok, assign(socket, game_state: state, tictactoe_server: server_atom)}
   end
 

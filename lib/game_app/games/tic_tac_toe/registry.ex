@@ -5,6 +5,7 @@ defmodule GameApp.Games.TicTacToe.Registry do
   use GenServer
 
   alias GameApp.Games.TicTacToe.GenServer, as: TicTacToe
+  @behaviour GameApp.Games.TicTacToe.Behavior
 
   @tic_tac_toe_processes [:tic, :tac, :toe]
 
@@ -12,6 +13,7 @@ defmodule GameApp.Games.TicTacToe.Registry do
     GenServer.start_link(__MODULE__, %{}, name: __MODULE__)
   end
 
+  @impl true
   def init(state) do
     Enum.each(@tic_tac_toe_processes, fn name ->
       {:ok, _pid} = start_tic_tac_toe(name)
@@ -29,23 +31,24 @@ defmodule GameApp.Games.TicTacToe.Registry do
     )
   end
 
+  @impl true
   def reset(name) do
-    GenServer.call(name, :reset)
+    GenServer.cast(name, :reset)
   end
 
+  @impl true
   def crash_server(name) do
     GenServer.cast(name, :crash)
   end
 
+  @impl true
+  @spec get_state(name :: atom()) :: any()
   def get_state(name) do
     GenServer.call(name, :get_state)
   end
 
+  @impl true
   def mark(name, position) do
-    GenServer.call(name, {:mark, position})
-  end
-
-  def topic(name) do
-    GenServer.call(name, :get_topic)
+    GenServer.cast(name, {:mark, position})
   end
 end
