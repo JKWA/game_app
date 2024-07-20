@@ -71,4 +71,10 @@ defmodule GameAppWeb.TicTacToeLive.GenServer do
   def handle_info({:update, new_state}, socket) do
     {:noreply, assign(socket, game_state: new_state)}
   end
+
+  def handle_info({:crash, _state}, socket) do
+    {:noreply,
+     socket
+     |> put_flash(:error, "Server crashed!")}
+  end
 end

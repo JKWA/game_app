@@ -33,7 +33,7 @@ defmodule GameApp.Games.TicTacToe.Registry do
 
   @impl true
   def reset(name) do
-    GenServer.cast(name, :reset)
+    GenServer.stop(name, :normal)
   end
 
   @impl true

@@ -42,7 +42,7 @@ defmodule GameApp.Games.TicTacToe.GenServer do
   end
 
   @doc """
-  Resets the game state.
+  Terminates the game server gracefully.
 
   ## Parameters
     - pid: The process identifier of the GenServer.
@@ -52,7 +52,7 @@ defmodule GameApp.Games.TicTacToe.GenServer do
   """
   @impl true
   def reset(pid) do
-    GenServer.cast(pid, :reset)
+    GenServer.stop(pid, :normal)
   end
 
   @doc """
@@ -114,13 +114,6 @@ defmodule GameApp.Games.TicTacToe.GenServer do
   end
 
   @impl true
-  def handle_cast(:reset, state) do
-    new_state = initial_state(state.topic)
-    broadcast_update(:update, new_state)
-    {:noreply, new_state}
-  end
-
-  @impl true
   def handle_cast({:mark, position}, state) do
     case Map.get(state.board, position) do
       nil ->
@@ -144,8 +137,15 @@ defmodule GameApp.Games.TicTacToe.GenServer do
   end
 
   @impl true
-  def handle_cast(:crash, _state) do
+  def handle_cast(:crash, state) do
+    broadcast_update(:crash, state)
     raise "BOMB!!!"
+  end
+
+  @impl true
+  def terminate(reason, state) do
+    Logger.info("Terminating #{state.topic} server: #{inspect(reason)}")
+    :ok
   end
 
   @spec broadcast_update(atom(), GameLogic.t()) :: :ok

@@ -2,14 +2,12 @@ defmodule GameApp.Games.TicTacToe.GenServerTest do
   @moduledoc """
   Tests for the GenServer game module.
   """
-
   use ExUnit.Case, async: false
   alias GameApp.Games.TicTacToe.GenServer, as: TicTacToe
 
   setup do
     {:ok, pid} = TicTacToe.start_link(topic: "tic_tac_toe_test")
     on_exit(fn -> Process.exit(pid, :normal) end)
-    # TicTacToe.reset(pid)
     {:ok, pid: pid}
   end
 
@@ -72,11 +70,14 @@ defmodule GameApp.Games.TicTacToe.GenServerTest do
   end
 
   describe "reset/1" do
-    test "resets the game to initial conditions", %{pid: pid} do
+    test "terminates the GenServer", %{pid: pid} do
+      assert Process.alive?(pid)
+
       TicTacToe.reset(pid)
-      state = TicTacToe.get_state(pid)
-      initial_state = TicTacToe.initial_state("tic_tac_toe_test")
-      assert state == initial_state
+
+      :timer.sleep(100)
+
+      refute Process.alive?(pid)
     end
   end
 end
