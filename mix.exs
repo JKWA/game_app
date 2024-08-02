@@ -62,7 +62,11 @@ defmodule GameApp.MixProject do
       {:httpoison, "~> 2.2.1"},
       {:hackney, "~> 1.20.1"},
       {:oban, "~> 2.17"},
-      {:logger_file_backend, "~> 0.0.14"}
+      {:logger_file_backend, "~> 0.0.14"},
+      {:open_api_spex, "~> 3.10"},
+      {:ymlr, "~> 2.0"},
+      {:poison, "~> 6.0"},
+      {:cors_plug, "~> 3.0"}
     ]
   end
 

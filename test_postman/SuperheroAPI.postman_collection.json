@@ -1,0 +1,357 @@
+{
+  "info": {
+    "_postman_id": "a8c8d4e4-5a39-4d9f-8d73-69a8e0d9d4d1",
+    "name": "Superhero API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Create Superhero - Valid",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"superhero\":{\"name\":\"Superman\",\"power\":80,\"location\":\"Metropolis\"}}"
+        },
+        "url": {
+          "raw": "{{base_url}}/api/superheroes",
+          "protocol": "http",
+          "host": ["{{base_url}}"],
+          "path": ["api", "superheroes"]
+        }
+      },
+      "response": [],
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Status code is 201\", function () {",
+              "    pm.response.to.have.status(201);",
+              "});",
+              "",
+              "const response = pm.response.json();",
+              "pm.environment.set(\"superheroId\", response.data.id);"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Create Superhero - Invalid Power",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"superhero\":{\"name\":\"Superman\",\"power\":150,\"location\":\"Metropolis\"}}"
+        },
+        "url": {
+          "raw": "{{base_url}}/api/superheroes",
+          "protocol": "http",
+          "host": ["{{base_url}}"],
+          "path": ["api", "superheroes"]
+        }
+      },
+      "response": [],
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Status code is 422\", function () {",
+              "    pm.response.to.have.status(422);",
+              "});",
+              "",
+              "const response = pm.response.json();",
+              "pm.test(\"Error key exists in response\", function () {",
+              "    pm.expect(response).to.have.property('errors');",
+              "    pm.expect(response.errors).to.have.property('power');",
+              "});"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Create Superhero - Missing Fields",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"superhero\":{\"name\":\"Superman\",\"power\":80}}"
+        },
+        "url": {
+          "raw": "{{base_url}}/api/superheroes",
+          "protocol": "http",
+          "host": ["{{base_url}}"],
+          "path": ["api", "superheroes"]
+        }
+      },
+      "response": [],
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Status code is 422\", function () {",
+              "    pm.response.to.have.status(422);",
+              "});",
+              "",
+              "const response = pm.response.json();",
+              "pm.test(\"Error key exists in response\", function () {",
+              "    pm.expect(response).to.have.property('errors');",
+              "    pm.expect(response.errors).to.have.property('location');",
+              "});"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Get All Superheroes",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{base_url}}/api/superheroes",
+          "protocol": "http",
+          "host": ["{{base_url}}"],
+          "path": ["api", "superheroes"]
+        }
+      },
+      "response": [],
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Status code is 200\", function () {",
+              "    pm.response.to.have.status(200);",
+              "});",
+              "const response = pm.response.json();",
+              "const superheroes = Array.isArray(response.data) ? response.data : [];",
+              "const superheroId = pm.environment.get(\"superheroId\");",
+              "pm.test(\"Created superhero is in the list\", function () {",
+              "    const superheroExists = superheroes.some(superhero => superhero.id === superheroId);",
+              "    pm.expect(superheroExists).to.be.true;",
+              "});"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Get Superhero",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{base_url}}/api/superheroes/:id",
+          "protocol": "http",
+          "host": ["{{base_url}}"],
+          "path": ["api", "superheroes", ":id"],
+          "variable": [
+            {
+              "key": "id",
+              "value": "{{superheroId}}"
+            }
+          ]
+        }
+      },
+      "response": [],
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Status code is 200\", function () {",
+              "    pm.response.to.have.status(200);",
+              "});",
+              "",
+              "const superhero = pm.response.json().data;",
+              "pm.test(\"Correct superhero is returned\", function () {",
+              "    pm.expect(superhero.id).to.equal(pm.environment.get(\"superheroId\"));",
+              "});"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Update Superhero",
+      "request": {
+        "method": "PUT",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"superhero\":{\"name\":\"Superman\",\"power\":25,\"location\":\"Boston\"}}"
+        },
+        "url": {
+          "raw": "{{base_url}}/api/superheroes/:id",
+          "protocol": "http",
+          "host": ["{{base_url}}"],
+          "path": ["api", "superheroes", ":id"],
+          "variable": [
+            {
+              "key": "id",
+              "value": "{{superheroId}}"
+            }
+          ]
+        }
+      },
+      "response": [],
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Status code is 200\", function () {",
+              "    pm.response.to.have.status(200);",
+              "});",
+              "",
+              "const updatedSuperhero = pm.response.json().data;",
+              "pm.test(\"Superhero is updated correctly\", function () {",
+              "    pm.expect(updatedSuperhero.power).to.equal(25);",
+              "    pm.expect(updatedSuperhero.location).to.equal(\"Boston\");",
+              "});"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Confirm Update",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{base_url}}/api/superheroes/:id",
+          "protocol": "http",
+          "host": ["{{base_url}}"],
+          "path": ["api", "superheroes", ":id"],
+          "variable": [
+            {
+              "key": "id",
+              "value": "{{superheroId}}"
+            }
+          ]
+        }
+      },
+      "response": [],
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Status code is 200\", function () {",
+              "    pm.response.to.have.status(200);",
+              "});",
+              "",
+              "const superhero = pm.response.json().data;",
+              "pm.test(\"Superhero details are updated\", function () {",
+              "    pm.expect(superhero.power).to.equal(25);",
+              "    pm.expect(superhero.location).to.equal(\"Boston\");",
+              "});"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Delete Superhero",
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "{{base_url}}/api/superheroes/:id",
+          "protocol": "http",
+          "host": ["{{base_url}}"],
+          "path": ["api", "superheroes", ":id"],
+          "variable": [
+            {
+              "key": "id",
+              "value": "{{superheroId}}"
+            }
+          ]
+        }
+      },
+      "response": [],
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Status code is 204\", function () {",
+              "    pm.response.to.have.status(204);",
+              "});"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Confirm Deletion",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{base_url}}/api/superheroes/:id",
+          "protocol": "http",
+          "host": ["{{base_url}}"],
+          "path": ["api", "superheroes", ":id"],
+          "variable": [
+            {
+              "key": "id",
+              "value": "{{superheroId}}"
+            }
+          ]
+        }
+      },
+      "response": [],
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Status code is 404\", function () {",
+              "    pm.response.to.have.status(404);",
+              "});"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ]
+    }
+  ]
+}

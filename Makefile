@@ -38,7 +38,7 @@ migrate.dev:
 	MIX_ENV=dev mix ecto.migrate
 
 serve.dev:
-	@echo "Running migrations for development environment..."
+	@echo "Recompiling and running dev server..."
 	MIX_ENV=dev mix clean
 	MIX_ENV=dev mix compile
 	MIX_ENV=dev mix phx.server
@@ -66,3 +66,33 @@ reset.test:
 	MIX_ENV=test mix ecto.create
 	@echo "Migrating database for testing environment..."
 	MIX_ENV=test mix ecto.migrate
+
+setup.integration:
+	@echo "Getting deps for integration environment..."
+	MIX_ENV=integration mix deps.get
+	@echo "Creating database for integration environment..."
+	MIX_ENV=integration mix ecto.create
+	@echo "Running migrations for integration environment..."
+	MIX_ENV=integration mix ecto.migrate
+
+reset.integration:
+	@echo "Resetting database for integration environment..."
+	MIX_ENV=integration mix ecto.drop
+	@echo "Recreating database for integration environment..."
+	MIX_ENV=integration mix ecto.create
+	@echo "Migrating database for integration environment..."
+	MIX_ENV=integration mix ecto.migrate
+
+serve.integration:
+	@echo "Recompiling and running integration server..."
+	MIX_ENV=integration mix clean
+	MIX_ENV=integration mix compile
+	MIX_ENV=integration mix phx.server
+
+test.integration:
+	@echo "Running Newman tests..."
+	@docker-compose run newman
+
+generate.openapi:
+	@echo "Generating OpenAPI documentation..."
+	MIX_ENV=dev mix openapi.spec.yaml --spec GameAppWeb.ApiSpec

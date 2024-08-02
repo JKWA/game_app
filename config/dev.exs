@@ -104,3 +104,6 @@ config :swoosh, :api_client, false
 
 # Configures the TextExtractService
 config :game_app, text_extract_service: GameApp.External.TextExtractDevService
+
+# config/dev.exs
+config :open_api_spex, :cache_adapter, OpenApiSpex.Plug.NoneCache

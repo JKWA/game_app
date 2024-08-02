@@ -13,4 +13,9 @@ defmodule GameAppWeb.ConnSetup do
     player = insert(:player)
     Map.put(context, :player_2, player)
   end
+
+  def create_superhero_1(context) do
+    superhero = insert(:superhero)
+    Map.put(context, :superhero_1, superhero)
+  end
 end

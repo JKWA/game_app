@@ -1,0 +1,218 @@
+---
+components:
+  responses: {}
+  schemas:
+    Superhero:
+      description: A superhero in the app
+      example:
+        id: 1
+        location: Metropolis
+        name: Superman
+        power: 100
+      properties:
+        id:
+          description: Superhero ID
+          type: integer
+        location:
+          description: Superhero location
+          type: string
+        name:
+          description: Superhero name
+          type: string
+        power:
+          description: Superhero power level
+          example: 75
+          maximum: 100
+          minimum: 1
+          type: integer
+      required:
+        - name
+        - location
+        - power
+      title: Superhero
+      type: object
+      x-struct: Elixir.GameAppWeb.Schemas.Superhero
+    SuperheroRequest:
+      description: POST body for creating a superhero
+      example:
+        superhero:
+          location: Metropolis
+          name: Superman
+          power: 100
+      properties:
+        superhero:
+          anyOf:
+            - $ref: '#/components/schemas/Superhero'
+      required:
+        - superhero
+      title: SuperheroRequest
+      type: object
+      x-struct: Elixir.GameAppWeb.Schemas.SuperheroRequest
+    SuperheroResponse:
+      description: Response schema for single superhero
+      example:
+        data:
+          id: 1
+          location: Metropolis
+          name: Superman
+          power: 100
+      properties:
+        data:
+          $ref: '#/components/schemas/Superhero'
+      title: SuperheroResponse
+      type: object
+      x-struct: Elixir.GameAppWeb.Schemas.SuperheroResponse
+    SuperheroesResponse:
+      description: Response schema for multiple superheroes
+      example:
+        data:
+          - id: 1
+            location: Metropolis
+            name: Superman
+            power: 100
+          - id: 2
+            location: Gotham
+            name: Batman
+            power: 90
+      properties:
+        data:
+          description: The superheroes details
+          items:
+            $ref: '#/components/schemas/Superhero'
+          type: array
+      title: SuperheroesResponse
+      type: object
+      x-struct: Elixir.GameAppWeb.Schemas.SuperheroesResponse
+info:
+  title: Superheroes API
+  version: '1.0'
+openapi: 3.0.0
+paths:
+  /api/superheroes:
+    get:
+      callbacks: {}
+      operationId: GameAppWeb.SuperheroController.index
+      parameters: []
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuperheroesResponse'
+          description: Superheroes
+      summary: List superheroes
+      tags: []
+    post:
+      callbacks: {}
+      operationId: GameAppWeb.SuperheroController.create
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SuperheroRequest'
+        description: SuperheroRequest
+        required: false
+      responses:
+        201:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuperheroResponse'
+          description: SuperheroResponse
+      summary: Create a superhero
+      tags: []
+  /api/superheroes/{id}:
+    delete:
+      callbacks: {}
+      operationId: GameAppWeb.SuperheroController.delete
+      parameters:
+        - description: ID of the superhero
+          in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      responses:
+        204:
+          content:
+            application/json: {}
+          description: No content
+      summary: Delete a superhero
+      tags: []
+    get:
+      callbacks: {}
+      operationId: GameAppWeb.SuperheroController.show
+      parameters:
+        - description: ID of the superhero
+          in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuperheroResponse'
+          description: SuperheroResponse
+      summary: Show a superhero
+      tags: []
+    patch:
+      callbacks: {}
+      operationId: GameAppWeb.SuperheroController.update (2)
+      parameters:
+        - description: ID of the superhero
+          in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SuperheroRequest'
+        description: SuperheroRequest
+        required: false
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuperheroResponse'
+          description: SuperheroResponse
+      summary: Update a superhero
+      tags: []
+    put:
+      callbacks: {}
+      operationId: GameAppWeb.SuperheroController.update
+      parameters:
+        - description: ID of the superhero
+          in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SuperheroRequest'
+        description: SuperheroRequest
+        required: false
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuperheroResponse'
+          description: SuperheroResponse
+      summary: Update a superhero
+      tags: []
+security: []
+servers:
+  - url: http://localhost:4080
+    variables: {}
+tags: []

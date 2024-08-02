@@ -1,6 +1,13 @@
 defmodule GameAppWeb.Router do
   use GameAppWeb, :router
 
+  @swagger_ui_config [
+    path: "/api/openapi",
+    default_model_expand_depth: 3,
+    display_operation_id: true,
+    csp_nonce_assign_key: %{script: :script_src_nonce, style: :style_src_nonce}
+  ]
+
   pipeline :browser do
     plug :accepts, ["html"]
     plug :fetch_session
@@ -12,6 +19,7 @@ defmodule GameAppWeb.Router do
 
   pipeline :api do
     plug :accepts, ["json"]
+    plug OpenApiSpex.Plug.PutApiSpec, module: GameAppWeb.ApiSpec
   end
 
   scope "/", GameAppWeb do
@@ -37,10 +45,18 @@ defmodule GameAppWeb.Router do
     live "/tic-tac-toe/:server", TicTacToeLive.GenServer, :index
   end
 
-  # Other scopes may use custom stacks.
-  # scope "/api", GameAppWeb do
-  #   pipe_through :api
-  # end
+  scope "/api" do
+    pipe_through :api
+
+    resources "/superheroes", GameAppWeb.SuperheroController, except: [:new, :edit]
+    get "/openapi", OpenApiSpex.Plug.RenderSpec, []
+  end
+
+  scope "/" do
+    pipe_through :browser
+
+    get "/docs", OpenApiSpex.Plug.SwaggerUI, @swagger_ui_config
+  end
 
   # Enable LiveDashboard and Swoosh mailbox preview in development
   if Application.compile_env(:game_app, :dev_routes) do

@@ -9,6 +9,7 @@ defmodule GameApp.Accounts.PlayerTest do
   alias GameApp.Accounts.Player
 
   @moduletag :player
+  @moduletag :schema
 
   @expected_fields_with_types [
     {:id, :id},
