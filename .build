@@ -44,11 +44,13 @@ GameAppWeb.Schemas.SuperheroesResponse.html
 GameAppWeb.Schemas.html
 GameAppWeb.SuperheroController.html
 GameAppWeb.SuperheroJSON.html
+GameAppWeb.SuperheroesChannel.html
 GameAppWeb.Telemetry.html
 GameAppWeb.TicTacToeLive.Board.html
 GameAppWeb.TicTacToeLive.GenServer.html
 GameAppWeb.TicTacToeLive.Navigate.html
 GameAppWeb.TicTacToeLive.WithAgent.html
+GameAppWeb.UserSocket.html
 GameAppWeb.html
 api-reference.html
 dist/handlebars.runtime-NWIB6V2M.js
@@ -68,7 +70,7 @@ dist/lato-latin-ext-300-normal-VPGGJKJL.woff2
 dist/lato-latin-ext-400-normal-N27NCBWW.woff2
 dist/lato-latin-ext-700-normal-Q2L5DVMW.woff2
 dist/remixicon-NKANDIL5.woff2
-dist/search_data-6980FC28.js
-dist/sidebar_items-F72B2511.js
+dist/search_data-B5144A18.js
+dist/sidebar_items-93D7A2CF.js
 index.html
 search.html
