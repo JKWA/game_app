@@ -11,7 +11,11 @@ defmodule GameAppWeb.Endpoint do
     same_site: "Lax"
   ]
 
+  # LiveView Socket
   socket "/live", Phoenix.LiveView.Socket, websocket: [connect_info: [session: @session_options]]
+
+  # Superheroes Channel Socket
+  socket "/socket", GameAppWeb.UserSocket, websocket: true, longpoll: false
 
   # Serve at "/" the static files from "priv/static" directory.
   #

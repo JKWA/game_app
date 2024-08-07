@@ -6,6 +6,12 @@ defmodule GameAppWeb.SuperheroController do
   alias GameApp.Superheroes.Superhero
   alias GameAppWeb.Schemas.{SuperheroRequest, SuperheroResponse, SuperheroesResponse}
 
+  @update_superhero_pub_topic "update_superhero"
+
+  def topic do
+    @update_superhero_pub_topic
+  end
+
   action_fallback GameAppWeb.FallbackController
 
   operation(:index,
@@ -30,6 +36,8 @@ defmodule GameAppWeb.SuperheroController do
 
   def create(conn, %{"superhero" => superhero_params}) do
     with {:ok, %Superhero{} = superhero} <- Superheroes.create_superhero(superhero_params) do
+      broadcast_update(:create, superhero)
+
       conn
       |> put_status(:created)
       |> render(:show, superhero: superhero)
@@ -77,6 +85,7 @@ defmodule GameAppWeb.SuperheroController do
 
     with {:ok, %Superhero{} = superhero} <-
            Superheroes.update_superhero(superhero, superhero_params) do
+      broadcast_update(:update, superhero)
       render(conn, :show, superhero: superhero)
     end
   end
@@ -100,7 +109,19 @@ defmodule GameAppWeb.SuperheroController do
     superhero = Superheroes.get_superhero!(id)
 
     with {:ok, %Superhero{}} <- Superheroes.delete_superhero(superhero) do
+      broadcast_update(:delete, superhero)
+
       send_resp(conn, :no_content, "")
     end
+  end
+
+  defp broadcast_update(action, superhero) do
+    IO.puts("Broadcasting #{action} for superhero #{superhero.id}")
+
+    Phoenix.PubSub.broadcast(
+      GameApp.PubSub,
+      @update_superhero_pub_topic,
+      {action, superhero}
+    )
   end
 end

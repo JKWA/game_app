@@ -96,3 +96,12 @@ test.integration:
 generate.openapi:
 	@echo "Generating OpenAPI documentation..."
 	MIX_ENV=dev mix openapi.spec.yaml --spec GameAppWeb.ApiSpec
+
+
+setup.react:
+	@echo "Install depedencies for React app..."
+	cd ./superheroes-react && npm install
+
+serve.react:
+	@echo "Starting React app..."
+	cd ./superheroes-react && npm run dev
