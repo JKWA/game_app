@@ -13,6 +13,7 @@ GameApp.Games.TicTacToe.WithAgent.html
 GameApp.LoggerFormatter.html
 GameApp.Mailer.html
 GameApp.Repo.html
+GameApp.Services.NotificationsService.html
 GameApp.Superheroes.Superhero.html
 GameApp.Superheroes.html
 GameApp.Websites.GetText.html
@@ -31,6 +32,7 @@ GameAppWeb.Gettext.html
 GameAppWeb.IncrementLive.Index.html
 GameAppWeb.Layouts.html
 GameAppWeb.LongJobLive.Index.html
+GameAppWeb.NotificationsChannel.html
 GameAppWeb.PageController.html
 GameAppWeb.PageHTML.html
 GameAppWeb.PlayerLive.FormComponent.html
@@ -44,6 +46,7 @@ GameAppWeb.Schemas.SuperheroesResponse.html
 GameAppWeb.Schemas.html
 GameAppWeb.SuperheroController.html
 GameAppWeb.SuperheroJSON.html
+GameAppWeb.SuperheroPresence.html
 GameAppWeb.SuperheroesChannel.html
 GameAppWeb.Telemetry.html
 GameAppWeb.TicTacToeLive.Board.html
@@ -70,7 +73,7 @@ dist/lato-latin-ext-300-normal-VPGGJKJL.woff2
 dist/lato-latin-ext-400-normal-N27NCBWW.woff2
 dist/lato-latin-ext-700-normal-Q2L5DVMW.woff2
 dist/remixicon-NKANDIL5.woff2
-dist/search_data-B5144A18.js
-dist/sidebar_items-93D7A2CF.js
+dist/search_data-53E8BDAA.js
+dist/sidebar_items-9A9C34A0.js
 index.html
 search.html

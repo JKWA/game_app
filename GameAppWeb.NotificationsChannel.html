@@ -8,7 +8,7 @@
     <meta name="project" content="game_app v0.1.0">
 
 
-    <title>GameAppWeb.TicTacToeLive.WithAgent — game_app v0.1.0</title>
+    <title>GameAppWeb.NotificationsChannel — game_app v0.1.0</title>
     <link rel="stylesheet" href="dist/html-elixir-K5ICTFVY.css" />
 
 
@@ -112,15 +112,11 @@ Pages
 <div id="top-content">
   <h1>
 
-    <span translate="no">GameAppWeb.TicTacToeLive.WithAgent</span> 
+    <span translate="no">GameAppWeb.NotificationsChannel</span> 
     <small class="app-vsn" translate="no">(game_app v0.1.0)</small>
 
   </h1>
 
-
-    <section id="moduledoc">
-<p>LiveView for Tic Tac Toe game.</p>
-    </section>
 
 </div>
 
@@ -138,31 +134,17 @@ Pages
 
     <div class="summary-row">
       <div class="summary-signature">
-        <a href="#handle_event/3" data-no-tooltip translate="no">handle_event(binary, arg2, socket)</a>
+        <a href="#child_spec/1" data-no-tooltip translate="no">child_spec(init_arg)</a>
 
       </div>
-
-        <div class="summary-synopsis"><p>Handles the client events to reset the game state and mark a position on the board.</p></div>
 
     </div>
 
     <div class="summary-row">
       <div class="summary-signature">
-        <a href="#handle_info/2" data-no-tooltip translate="no">handle_info(arg, socket)</a>
+        <a href="#start_link/1" data-no-tooltip translate="no">start_link(triplet)</a>
 
       </div>
-
-        <div class="summary-synopsis"><p>Handles the update message from PubSub to update the game state.</p></div>
-
-    </div>
-
-    <div class="summary-row">
-      <div class="summary-signature">
-        <a href="#mount/3" data-no-tooltip translate="no">mount(params, session, socket)</a>
-
-      </div>
-
-        <div class="summary-synopsis"><p>Mounts the LiveView and subscribes to the WithAgent topic.</p></div>
 
     </div>
 
@@ -179,55 +161,38 @@ Pages
       <span class="text">Functions</span>
     </h1>
     <div class="functions-list">
-<section class="detail" id="handle_event/3">
+<section class="detail" id="child_spec/1">
 
   <div class="detail-header">
-    <a href="#handle_event/3" class="detail-link" data-no-tooltip title="Link to this function">
+    <a href="#child_spec/1" class="detail-link" data-no-tooltip title="Link to this function">
       <i class="ri-link-m" aria-hidden="true"></i>
       <span class="sr-only">Link to this function</span>
     </a>
-    <h1 class="signature" translate="no">handle_event(binary, arg2, socket)</h1>
+    <h1 class="signature" translate="no">child_spec(init_arg)</h1>
 
 
   </div>
 
   <section class="docstring">
 
-<p>Handles the client events to reset the game state and mark a position on the board.</p>
+
   </section>
 </section>
-<section class="detail" id="handle_info/2">
+<section class="detail" id="start_link/1">
 
   <div class="detail-header">
-    <a href="#handle_info/2" class="detail-link" data-no-tooltip title="Link to this function">
+    <a href="#start_link/1" class="detail-link" data-no-tooltip title="Link to this function">
       <i class="ri-link-m" aria-hidden="true"></i>
       <span class="sr-only">Link to this function</span>
     </a>
-    <h1 class="signature" translate="no">handle_info(arg, socket)</h1>
+    <h1 class="signature" translate="no">start_link(triplet)</h1>
 
 
   </div>
 
   <section class="docstring">
 
-<p>Handles the update message from PubSub to update the game state.</p>
-  </section>
-</section>
-<section class="detail" id="mount/3">
 
-  <div class="detail-header">
-    <a href="#mount/3" class="detail-link" data-no-tooltip title="Link to this function">
-      <i class="ri-link-m" aria-hidden="true"></i>
-      <span class="sr-only">Link to this function</span>
-    </a>
-    <h1 class="signature" translate="no">mount(params, session, socket)</h1>
-
-
-  </div>
-
-  <section class="docstring">
-
-<p>Mounts the LiveView and subscribes to the WithAgent topic.</p>
   </section>
 </section>
 
