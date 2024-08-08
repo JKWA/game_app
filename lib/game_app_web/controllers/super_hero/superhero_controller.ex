@@ -1,6 +1,7 @@
 defmodule GameAppWeb.SuperheroController do
   use GameAppWeb, :controller
   use OpenApiSpex.ControllerSpecs
+  require Logger
 
   alias GameApp.Superheroes
   alias GameApp.Superheroes.Superhero
@@ -116,7 +117,7 @@ defmodule GameAppWeb.SuperheroController do
   end
 
   defp broadcast_update(action, superhero) do
-    IO.puts("Broadcasting #{action} for superhero #{superhero.id}")
+    Logger.debug("Broadcasting #{action} for superhero #{superhero.id}")
 
     Phoenix.PubSub.broadcast(
       GameApp.PubSub,

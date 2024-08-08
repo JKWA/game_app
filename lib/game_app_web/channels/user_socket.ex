@@ -9,6 +9,7 @@ defmodule GameAppWeb.UserSocket do
   ## Channels
 
   channel "superheroes:*", GameAppWeb.SuperheroesChannel
+  channel "notifications:*", GameAppWeb.NotificationsChannel
 
   # Socket params are passed from the client and can
   # be used to verify and authenticate a user. After

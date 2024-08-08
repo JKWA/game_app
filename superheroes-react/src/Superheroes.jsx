@@ -26,8 +26,8 @@ function Superheroes() {
     const channel = socket.channel("superheroes:lobby", {});
 
     channel.join()
-      .receive("ok", resp => { console.log("Joined successfully", resp); })
-      .receive("error", resp => { console.log("Unable to join", resp); });
+      .receive("ok", () => { console.log("Joined Superheroes channel", resp); })
+      .receive("error", (resp) => { console.log("Unable to join Superheroes channel", resp); });
 
     channel.on("hydrate", payload => {
       const {superheroes, message_id} = payload
@@ -65,6 +65,8 @@ function Superheroes() {
   }, []);
 
   return (
+    <div>
+      <h2>Saved</h2>
     <table>
       <thead>
         <tr>
@@ -83,6 +85,7 @@ function Superheroes() {
         ))}
       </tbody>
     </table>
+    </div>
   );
 }
 

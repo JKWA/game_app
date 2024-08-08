@@ -18,7 +18,10 @@ defmodule GameApp.Application do
       {Phoenix.PubSub, name: GameApp.PubSub},
       # Start Finch
       {Finch, name: GameApp.Finch},
-
+      # Start Superhero Presence,
+      GameAppWeb.SuperheroPresence,
+      # Start the NotificationService
+      GameApp.Services.NotificationsService,
       # Start Global TicTacToe
       {TicTacToe.WithAgent, name: TicTacToe.WithAgent},
 

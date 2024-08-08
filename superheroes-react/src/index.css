@@ -54,6 +54,12 @@ button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
 }
 
+li {
+  list-style-type: none;
+  text-align: left;
+  margin-bottom: .5em;
+}
+
 table {
   width: 100%;
   border-collapse: collapse;

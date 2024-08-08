@@ -55,7 +55,7 @@ defmodule GameApp.MixProject do
       {:dialyxir, "~> 1.4", only: :dev, runtime: false},
       {:floki, ">= 0.30.0", only: :test},
       {:bypass, "~> 2.1", only: [:dev, :test]},
-      {:faker, "~> 0.17", only: [:dev, :test]},
+      {:faker, "~> 0.17"},
       {:ex_machina, "~> 2.7", only: :test},
       {:mox, "~> 1.1.0", only: :test},
       {:credo, "~> 1.6", only: [:dev, :test], runtime: false},
